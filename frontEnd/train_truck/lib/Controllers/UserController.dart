@@ -33,7 +33,7 @@ class UserController extends GetxController{
     final isValid = RegistrationFormKey.currentState!.validate();
     if(!isValid) {return;}
     RegistrationFormKey.currentState!.save();
-
+    isLoading.value=true;
     if(registrationForm.value.firstName!.isEmpty)
     {return "Veuillez saisir votre prénom";}
 
@@ -68,7 +68,7 @@ class UserController extends GetxController{
     final isValid = loginFormKey.currentState!.validate();
     if(!isValid) {return;}
     loginFormKey.currentState!.save();
-
+    isLoadingLogin.value=true;
 
     if(loginForm.value.passwordUser!.isEmpty)
     {return "Veuillez saisir votre mot de passe";}
@@ -81,16 +81,16 @@ class UserController extends GetxController{
 
 
 
-    var res=await userService.authenticate(registrationForm.value);
+    var res=await userService.authenticate(loginForm.value);
     isLoadingLogin.value = false;
-    print(res.body);
+    print("-------------------------"+res.statusCode.toString());
 
     if(res.statusCode == 200)
     {
       return "Success";
     }else
     {
-      return jsonDecode(res.body);
+      return "Veuillez vérifier le numéro de téléphone et le mot de passe";
     }
 
 
