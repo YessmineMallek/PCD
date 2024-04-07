@@ -1,0 +1,44 @@
+package com.trainTruck.demo.Service;
+
+import javax.management.relation.Role;
+
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import com.trainTruck.demo.Config.JwtService;
+import com.trainTruck.demo.Controller.AuthenticationRequest;
+import com.trainTruck.demo.Controller.AuthenticationResponse;
+import com.trainTruck.demo.Controller.RegisterRequest;
+import com.trainTruck.demo.Model.User;
+import com.trainTruck.demo.Repository.UserRepository;
+
+import lombok.NoArgsConstructor;
+
+@Service
+@NoArgsConstructor
+public class AuthenticationService {
+
+	private final UserRepository userRepo;
+	private final PasswordEncoder passwordEncoder;
+	private final JwtService jwtService;
+	
+	
+	public AuthenticationResponse register(RegisterRequest request)
+	{
+		User user= User.builder()
+				.firstName(request.getFirstName())
+				.lastName(request.getLastName())
+				.phoneNumber(request.getPhoneNumber())
+				.password_user(passwordEncoder.encode(request.getPassword_user()))
+				.role(com.trainTruck.demo.Model.Role.USER)
+				.build();
+		userRepo.save(user);
+		var jwtToken=jwtService.generateToken(user);
+	  return user;	
+	}
+	
+	public AuthenticationResponse authenticate(AuthenticationRequest request)
+	{
+	  return null;	
+	}
+}

@@ -1,0 +1,5 @@
+package com.trainTruck.demo.Service;
+
+public class AuthenticationService {
+
+}

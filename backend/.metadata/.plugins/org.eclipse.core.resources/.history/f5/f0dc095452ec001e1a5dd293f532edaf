@@ -1,0 +1,24 @@
+package com.trainTruck.demo.Service;
+
+import org.springframework.stereotype.Service;
+
+import com.trainTruck.demo.Controller.AuthenticationResponse;
+import com.trainTruck.demo.Controller.RegisterRequest;
+
+import lombok.NoArgsConstructor;
+
+@Service
+@NoArgsConstructor
+public class AuthenticationService {
+
+	
+	public AuthenticationResponse register(RegisterRequest request)
+	{
+	  return null;	
+	}
+	
+	public AuthenticationResponse register(RegisterRequest request)
+	{
+	  return null;	
+	}
+}

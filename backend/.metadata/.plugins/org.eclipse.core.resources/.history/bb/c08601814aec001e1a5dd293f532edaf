@@ -1,0 +1,5 @@
+package com.trainTruck.demo.Config;
+
+public class ApplicationConfig {
+
+}

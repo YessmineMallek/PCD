@@ -1,0 +1,11 @@
+package com.trainTruck.demo.Controller;
+
+
+
+
+public class RegisterRequest {
+
+	private String firstName;
+	private String lastName;
+	private String phoneNumber;
+	private String password_user;}

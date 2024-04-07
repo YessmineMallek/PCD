@@ -1,0 +1,9 @@
+package com.trainTruck.demo.Config;
+
+public class JwtService {
+
+	public String extractPhoneNumber(String token)
+	{
+		return null;
+	}
+}
