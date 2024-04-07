@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:train_truck/Screens/SplashScreenItems.dart';
-import 'package:train_truck/Screens/loginPage.dart';
+import 'package:train_truck/Screens/Login_Registration/loginPage.dart';
 
 class SplashScreen extends StatelessWidget {
   SplashScreen({super.key});

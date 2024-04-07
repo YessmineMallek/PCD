@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:train_truck/Screens/Authentification.dart';
-import 'package:train_truck/Screens/ChoicePage.dart';
+import 'package:train_truck/Screens/Login_Registration/Authentification.dart';
+import 'package:train_truck/Screens/Login_Registration/ChoicePage.dart';
 import 'package:train_truck/Screens/Providers/HeaderWidget.dart';
 import 'package:train_truck/Screens/Providers/logoWidget.dart';
 class LoginPage extends StatefulWidget {

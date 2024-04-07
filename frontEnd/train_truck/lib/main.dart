@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:train_truck/Screens/Itin%C3%A9raireScreen.dart';
+import 'package:train_truck/Screens/Login_Registration/Authentification.dart';
 import 'package:train_truck/Screens/SplashScreen.dart';
-import 'package:train_truck/Screens/loginPage.dart';
+import 'package:train_truck/Screens/Login_Registration/loginPage.dart';
 
 void main() {
   runApp( MyApp());
@@ -21,8 +22,8 @@ class MyApp extends StatelessWidget {
         primaryColor: _primaryColor
       ),
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      home: ItineraireScreen(),
+      title: 'Train Truck',
+      home: AuthenticationPage(),
     );
   }
 }
