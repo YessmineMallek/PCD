@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:train_truck/Controllers/UserController.dart';
+import 'package:train_truck/Screens/Login_Registration/ChoicePage.dart';
 import 'package:train_truck/Screens/Providers/HeaderWidget.dart';
 import 'package:train_truck/Screens/Providers/logoWidget.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 
 
 class AuthenticationPage extends StatefulWidget {
@@ -13,14 +16,11 @@ class AuthenticationPage extends StatefulWidget {
 }
 
 class _AuthenticationPageState extends State<AuthenticationPage> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController _emailController = TextEditingController();
-  var obscureValue=true;
+  UserController userController=Get.put(UserController());
 
   @override
   Widget build(BuildContext context) {
     var primaryColor=Theme.of(context).primaryColor;
-
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -36,7 +36,7 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
             Container(
               padding: EdgeInsets.symmetric(vertical: 30,horizontal: 30),
               child: Form(
-                key:_formKey ,
+                key:UserController.RegistrationFormKey ,
                 child: Column(
                   children: [
                     //prenom utilisateur
@@ -66,7 +66,7 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
                             }
                           },
                           onSaved: (newValue) {
-                            //controller.profileForm.value.phone = newValue;
+                            userController.registrationForm.value.firstName = newValue;
                           }),
                     ),
 
@@ -98,7 +98,7 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
                             }
                           },
                           onSaved: (newValue) {
-                            //controller.profileForm.value.phone = newValue;
+                            userController.registrationForm.value.lastName = newValue;
                           }),
                     ),
                     //Numéro de téléphone
@@ -132,7 +132,7 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
                             }
                           },
                           onSaved: (newValue) {
-                            //controller.profileForm.value.phone = newValue;
+                            userController.registrationForm.value.phoneNumber = newValue;
                           }),
                     ),
 
@@ -141,18 +141,18 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
                       margin: EdgeInsets.only(top:15),
                       height: 48,
                       child: TextFormField(
-                          obscureText: obscureValue,
+                          obscureText:  userController.obscure.value,
 
                           keyboardType: TextInputType.text,
                           decoration: InputDecoration(
                               suffixIcon: IconButton(
                                 color: Theme.of(context).primaryColor,
                                 onPressed: (){
-                                  obscureValue==true?obscureValue=false:obscureValue=true;
+                                  userController.obscure.value=!userController.obscure.value;
                                   setState(() {
                                   });
                                 },
-                                icon:obscureValue==true?Icon(
+                                icon: userController.obscure.value==true?Icon(
                                   FontAwesomeIcons.eyeSlash,
                                   size: 20,
                                 ): Icon(Icons.remove_red_eye_outlined) ,
@@ -178,12 +178,36 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
                             }
                           },
                           onSaved: (newValue) {
-                            //controller.profileForm.value.phone = newValue;
+                            userController.registrationForm.value.passwordUser = newValue;
                           }
                       ),
                     ),
                     SizedBox(height: 15,),
-                    ElevatedButton(onPressed: (){},
+                    ElevatedButton(
+                      onPressed: ()async{
+
+                      var res=await userController.registration();
+                      if(res=="Success")
+                        {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>  ChoicePage()),
+                          );
+                        }else
+                        {
+
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content:  Text(res.toString()),
+                              action: SnackBarAction(
+                                label: 'Action',
+                                onPressed: () {},
+                              ),
+                            ),
+                          );
+                        }
+                    },
                       style: ButtonStyle(
                         shape: MaterialStateProperty.all<
                             RoundedRectangleBorder>(
@@ -196,12 +220,14 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
                         backgroundColor:
                         MaterialStateProperty.all(Theme.of(context).primaryColor),
                       ),
-                      child: Text(
-                        "S'inscrire",
-                        style: TextStyle(
-                            fontSize: 18,
-                            color: Colors.white,
-                            fontWeight: FontWeight.normal),
+                      child: Obx(
+                        ()=>(userController.isLoading.value==false) ?Text(
+                          "S'inscrire",
+                          style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.white,
+                              fontWeight: FontWeight.normal),
+                        ):CircularProgressIndicator(),
                       ),),
 
                   ],
