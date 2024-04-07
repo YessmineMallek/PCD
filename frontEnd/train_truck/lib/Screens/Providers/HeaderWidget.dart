@@ -9,16 +9,16 @@ class HeaderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  Stack(children: [
-        Image.asset("assets/images/entete.png"),
+      Image.asset("assets/images/entete.png"),
 
-        Container(
-            padding: EdgeInsets.symmetric(vertical: 40),
-            child: IconButton(onPressed: (){
-              Navigator.pop(context);
+      Container(
+          padding: EdgeInsets.symmetric(vertical: 40),
+          child: IconButton(onPressed: (){
+            Navigator.pop(context);
 
-            },
-                icon: Icon(Icons.arrow_back_ios_new_sharp,
-                          color: Colors.black,)))
+          },
+              icon: Icon(Icons.arrow_back_ios_new_sharp,
+                color: Colors.black,)))
     ]);
   }
 }

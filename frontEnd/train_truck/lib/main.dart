@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:train_truck/Screens/Itin%C3%A9raireScreen.dart';
 import 'package:train_truck/Screens/SplashScreen.dart';
 import 'package:train_truck/Screens/loginPage.dart';
 
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      home: SplashScreen(),
+      home: ItineraireScreen(),
     );
   }
 }
