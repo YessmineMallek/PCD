@@ -56,9 +56,14 @@ class UserController extends GetxController{
     if(res.statusCode == 200)
       {
         return "Success";
-      }else
+      }else if (res.statusCode == 409)
       {
-          return jsonDecode(res.body);
+        return jsonDecode(res.body)["msg"];
+      }
+
+      else
+      {
+          return jsonDecode(res.body)["msg"];
       }
   }
 
