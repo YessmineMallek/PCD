@@ -1,4 +1,0 @@
-spring.application.name=trainTruck
-spring.datasource.url=jdbc:postgresql://localhost:5432/GTFS_Base
-spring.datasource.username=postgres
-spring.datasource.password=mallek12

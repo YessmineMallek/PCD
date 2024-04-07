@@ -19,7 +19,16 @@ public class AuthenticationController {
 	@PostMapping("/register")
 	public ResponseEntity<AuthenticationResponse> register (@RequestBody RegisterRequest request)
 	{
-		return ResponseEntity.ok(service.register(request));
+		var res=service.register(request);
+		if(res.getToken()==null)
+		{
+			return ResponseEntity.status(409).body(res);
+
+		}else
+		{
+			return ResponseEntity.ok(res);
+
+		}
 	}
 	
 	

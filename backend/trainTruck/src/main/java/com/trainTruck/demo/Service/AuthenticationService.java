@@ -2,6 +2,7 @@ package com.trainTruck.demo.Service;
 
 import javax.management.relation.Role;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -35,9 +36,22 @@ public class AuthenticationService {
 				.password_user(passwordEncoder.encode(request.getPassword_user()))
 				.role(com.trainTruck.demo.Model.Role.USER)
 				.build();
-		userRepo.save(user);
-		var jwtToken=jwtService.generateToken(user);
-	  return AuthenticationResponse.builder().token(jwtToken).build();	
+		try {
+			userRepo.save(user);
+			 var jwtToken=jwtService.generateToken(user);
+			  return AuthenticationResponse.builder().token(jwtToken).build();	
+
+			
+		}catch(Exception e)
+		{
+			if(e.getClass() == DataIntegrityViolationException.class)
+				return AuthenticationResponse.builder().msg("Numero de telephone existe deja").build();	
+			else
+				return AuthenticationResponse.builder().msg("Erreur").build();	
+
+
+		}
+		
 	}
 	
 	public AuthenticationResponse authenticate(AuthenticationRequest request)
