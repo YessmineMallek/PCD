@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:train_truck/Controllers/UserController.dart';
 import 'package:train_truck/Screens/Login_Registration/Authentification.dart';
 import 'package:train_truck/Screens/Login_Registration/ChoicePage.dart';
 import 'package:train_truck/Screens/Providers/HeaderWidget.dart';
@@ -15,9 +16,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController _emailController = TextEditingController();
-  var obscureValue=true;
+  UserController userController=Get.put(UserController());
+
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class _LoginPageState extends State<LoginPage> {
             Container(
                 padding: EdgeInsets.symmetric(vertical: 30,horizontal: 30),
                 child: Form(
-                  key: _formKey,
+                  key: UserController.loginFormKey,
                   child: Column(
                     children: <Widget>[
 
@@ -63,7 +63,7 @@ class _LoginPageState extends State<LoginPage> {
                               }
                             },
                             onSaved: (newValue) {
-                              //controller.profileForm.value.phone = newValue;
+                              userController.loginForm.value.phoneNumber = newValue;
                             }),
                       ),
 
@@ -72,18 +72,18 @@ class _LoginPageState extends State<LoginPage> {
                         margin: EdgeInsets.only(top:30),
                         height: 48,
                         child: TextFormField(
-                          obscureText: obscureValue,
+                          obscureText: userController.obscure.value,
 
                             keyboardType: TextInputType.text,
                             decoration: InputDecoration(
                               suffixIcon: IconButton(
                                 color: Theme.of(context).primaryColor,
                                 onPressed: (){
-                                  obscureValue==true?obscureValue=false:obscureValue=true;
+                                  userController.obscure.value=!userController.obscure.value;
                                   setState(() {
                                   });
                                   },
-                                icon:obscureValue==true?Icon(
+                                icon:userController.obscure.value==true?Icon(
                                   FontAwesomeIcons.eyeSlash,
                                   size: 20,
                                 ): Icon(Icons.remove_red_eye_outlined) ,
@@ -109,7 +109,7 @@ class _LoginPageState extends State<LoginPage> {
                               }
                             },
                             onSaved: (newValue) {
-                              //controller.profileForm.value.phone = newValue;
+                              userController.loginForm.value.passwordUser = newValue;
                             }
                             ),
                       ),
@@ -128,12 +128,25 @@ class _LoginPageState extends State<LoginPage> {
                             )),
                       ),
 
-                      ElevatedButton(onPressed: (){
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>  ChoicePage()),
-                        );
+                      ElevatedButton(onPressed: ()async{
+                        var res=await userController.authenticate();
+                        if(res=="Success")
+                        {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>  ChoicePage()),
+                          );
+                        }else
+                        {
+
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content:  Text(res.toString()),
+
+                            ),
+                          );
+                        }
 
                       },
                           style: ButtonStyle(
@@ -209,12 +222,14 @@ class _LoginPageState extends State<LoginPage> {
                                   backgroundColor:
                                   MaterialStateProperty.all(Theme.of(context).primaryColor),
                                 ),
-                                child: Text(
-                                  "S'inscrire",
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.normal),
+                                child: Obx(()=>userController.isLoadingLogin.value==false?
+                                   Text(
+                                    "S'inscrire",
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.normal),
+                                   ):CircularProgressIndicator(),
                                 ),),
 
 

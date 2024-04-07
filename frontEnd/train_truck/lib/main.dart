@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:train_truck/Screens/Itin%C3%A9raireScreen.dart';
 import 'package:train_truck/Screens/Login_Registration/Authentification.dart';
-import 'package:train_truck/Screens/SplashScreen.dart';
+import 'package:train_truck/Screens/Login_Registration/SplashScreen.dart';
 import 'package:train_truck/Screens/Login_Registration/loginPage.dart';
 
 void main() {
@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       title: 'Train Truck',
-      home: AuthenticationPage(),
+      home: SplashScreen(),
     );
   }
 }

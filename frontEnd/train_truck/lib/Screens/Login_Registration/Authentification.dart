@@ -200,10 +200,7 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content:  Text(res.toString()),
-                              action: SnackBarAction(
-                                label: 'Action',
-                                onPressed: () {},
-                              ),
+
                             ),
                           );
                         }
