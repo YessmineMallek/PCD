@@ -1,0 +1,13 @@
+package com.trainTruck.demo.Service;
+
+import java.util.List;
+
+import com.trainTruck.demo.Model.Stop;
+
+public class StopService {
+	
+	
+	public List<Stop> getStops() {
+		
+	}
+}
