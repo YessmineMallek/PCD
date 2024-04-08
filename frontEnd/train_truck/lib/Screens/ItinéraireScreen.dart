@@ -128,8 +128,7 @@ class _ItineraireScreen extends State<ItineraireScreen> {
     );
   }
   Widget content() {
-    return Container();
-   /* return FlutterMap(
+    return FlutterMap(
       options: MapOptions(
           initialCenter: LatLng( 35.821430, 10.634422),
           initialZoom: 12,
@@ -137,7 +136,7 @@ class _ItineraireScreen extends State<ItineraireScreen> {
           const InteractionOptions(flags: ~InteractiveFlag.doubleTapZoom)),
       children: [
         openStreetMapTileLater,
-        /*MarkerLayer(markers:[
+        MarkerLayer(markers:[
           Marker(
               point: LatLng(35.83333 , 10.6333308),
               width: 40,
@@ -148,10 +147,10 @@ class _ItineraireScreen extends State<ItineraireScreen> {
                 size: 30,
                 color: Colors.red,
               )),
-        ]),*/
+        ]),
 
       ],
-    );*/
+    );
   }
 
   TileLayer get openStreetMapTileLater => TileLayer(

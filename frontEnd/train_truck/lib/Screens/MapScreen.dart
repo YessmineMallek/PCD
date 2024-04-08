@@ -34,8 +34,7 @@ class _MapScreenState extends State<MapScreen> {
     );
   }
   Widget content() {
-    return Container();
-   /* return FlutterMap(
+    return FlutterMap(
       options: MapOptions(
         initialCenter: LatLng( 35.821430, 10.634422),
         initialZoom: 12,
@@ -57,7 +56,7 @@ class _MapScreenState extends State<MapScreen> {
         ]),
 
       ],
-    );*/
+    );
   }
 
   TileLayer get openStreetMapTileLater => TileLayer(

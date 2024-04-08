@@ -4,6 +4,7 @@ import 'package:train_truck/Screens/Itin%C3%A9raireScreen.dart';
 import 'package:train_truck/Screens/Login_Registration/Authentification.dart';
 import 'package:train_truck/Screens/Login_Registration/SplashScreen.dart';
 import 'package:train_truck/Screens/Login_Registration/loginPage.dart';
+import 'package:train_truck/Screens/MapScreen.dart';
 
 void main() {
   runApp( MyApp());
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       title: 'Train Truck',
-      home: SplashScreen(),
+      home: MapScreen(),
     );
   }
 }
