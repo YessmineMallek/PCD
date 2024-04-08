@@ -1,0 +1,32 @@
+package com.trainTruck.demo.Model;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name="stops")
+public class Stop {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int stop_id;
+	private String stop_code;
+	private String stop_name;
+	private String stop_desc;
+	private float stop_lat=0;
+	private float stop_lon=0;
+
+
+
+}

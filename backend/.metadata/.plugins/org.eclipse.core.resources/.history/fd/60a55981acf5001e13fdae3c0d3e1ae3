@@ -1,0 +1,10 @@
+package com.trainTruck.demo.Service;
+
+public class OtpService {
+	
+	String baseUrl="http://localhost:8080/otp/gtfs/v1";
+	
+	public List<Stop> getStations() {
+		
+	}
+}
