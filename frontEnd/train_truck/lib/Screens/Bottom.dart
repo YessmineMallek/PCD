@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:train_truck/Screens/Maps/Itin%C3%A9raireScreen.dart';
 import 'package:train_truck/Screens/Notifications/NotificationPage.dart';
 import 'package:train_truck/Screens/reclamation/ReclamationPage.dart';
 
@@ -25,7 +26,7 @@ class _BottomPageState extends State<BottomPage> {
     var primaryColor=Theme.of(context).primaryColor;
 
     pages = <Widget>[
-      ReclamationPage(),
+      ItineraireScreen(),
       ReclamationPage(),
       ReclamationPage(),
       NotificationPage()
@@ -86,8 +87,9 @@ class _BottomPageState extends State<BottomPage> {
                   label: 'Profile',
                 icon: IconButton(
                   icon: SvgPicture.asset(
-                    "assets/images/iconProfile.svg",
-                    height: 100,
+                    "assets/images/iconNotif.svg",
+                    height: 35,
+                    width: 35,
                     color:currentIndex==3? primaryColor:Colors.grey,
                   ),
                   onPressed: null,

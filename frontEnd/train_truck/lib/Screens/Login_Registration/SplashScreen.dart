@@ -1,10 +1,8 @@
-import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hexcolor/hexcolor.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:train_truck/Screens/SplashScreenItems.dart';
+import 'package:train_truck/Screens/Login_Registration/SplashScreenItems.dart';
 import 'package:train_truck/Screens/Login_Registration/loginPage.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -12,9 +10,13 @@ class SplashScreen extends StatelessWidget {
 
   final controller = SplashScreenItems();
   final pageController = PageController();
-  final height = Get.height;
+
+
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+
+   var  _primaryColor=Theme?.of(context).primaryColor;
     return Scaffold(
         bottomSheet: Container(
           padding: EdgeInsets.symmetric(horizontal: 30, vertical: 30),
@@ -25,7 +27,7 @@ class SplashScreen extends StatelessWidget {
                 controller: pageController,
                 count: controller.items.length,
                 effect: WormEffect(
-                    activeDotColor:Theme.of(context).primaryColor, dotWidth: 30),
+                    activeDotColor:_primaryColor, dotWidth: 30),
               ),
               TextButton(
                   onPressed: () {

@@ -22,8 +22,7 @@ class Stop {
       this.locationType,
       this.parentStation});
 
-  Stop.fromJson(Map<String, dynamic> json) {
-    stopId = json['stop_id'];
+  Stop.fromJson(dynamic json) {
     stopCode = json['stop_code'];
     stopName = json['stop_name'];
     stopDesc = json['stop_desc'];

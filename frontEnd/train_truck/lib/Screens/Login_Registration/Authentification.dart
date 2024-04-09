@@ -196,13 +196,16 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
                           );
                         }else
                         {
+                        if(res!=null){
 
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content:  Text(res.toString()),
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content:  Text(res.toString()),
 
-                            ),
-                          );
+                                ),
+                              );
+                            }
+
                         }
                     },
                       style: ButtonStyle(

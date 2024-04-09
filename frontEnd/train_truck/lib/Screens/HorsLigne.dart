@@ -3,8 +3,8 @@ import 'package:train_truck/Models/Arret.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:train_truck/Models/Arret.dart';
-import 'package:train_truck/Screens/Itin%C3%A9raireScreen.dart';
-import 'package:train_truck/Screens/ItineraireCard.dart';
+import 'package:train_truck/Screens/Maps/Itin%C3%A9raireScreen.dart';
+import 'package:train_truck/Screens/Maps/ItineraireCard.dart';
 
 class HorsLigne extends StatefulWidget {
   const HorsLigne({Key? key}) : super(key: key);
@@ -41,7 +41,7 @@ class _HorsLigneState extends State<HorsLigne> {
           children: [
             Stack(
               children: [
-                Image.asset("Assets/images/entete.png"),
+                Image.asset("assets/images/entete.png"),
                 Container(
                   padding: EdgeInsets.symmetric(vertical: 50),
                   child: Row(

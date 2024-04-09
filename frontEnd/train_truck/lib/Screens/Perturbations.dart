@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:train_truck/Models/Arret.dart';
 import 'package:train_truck/Screens/Favoris/LigneFavorisCard.dart';
-import 'package:train_truck/Screens/Itin%C3%A9raireScreen.dart';
+import 'package:train_truck/Screens/Maps/Itin%C3%A9raireScreen.dart';
 
 
 class Perturbations extends StatefulWidget {
@@ -22,7 +22,7 @@ class _PerturbationsState extends State<Perturbations> {
           children: [
             Stack(
               children: [
-                Image.asset("Assets/images/entete.png"),
+                Image.asset("assets/images/entete.png"),
                 Container(
                   padding: EdgeInsets.symmetric(vertical: 50),
                   child: Row(

@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import 'package:train_truck/Models/User.dart';
 import 'package:train_truck/Services/UserService.dart';
 
+import '../main.dart';
+
 class UserController extends GetxController{
   static GlobalKey<FormState> RegistrationFormKey = GlobalKey<FormState>();
   static GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
@@ -30,6 +32,7 @@ class UserController extends GetxController{
 
   Future registration()async
   {
+
     final isValid = RegistrationFormKey.currentState!.validate();
     if(!isValid) {return;}
     RegistrationFormKey.currentState!.save();
@@ -55,6 +58,8 @@ class UserController extends GetxController{
 
     if(res.statusCode == 200)
       {
+        await UserService.saveToken(res.body['jwt']);
+
         return "Success";
       }else if (res.statusCode == 409)
       {
@@ -70,6 +75,7 @@ class UserController extends GetxController{
 
   Future authenticate()async
   {
+
     final isValid = loginFormKey.currentState!.validate();
     if(!isValid) {return;}
     loginFormKey.currentState!.save();
@@ -92,7 +98,14 @@ class UserController extends GetxController{
 
     if(res.statusCode == 200)
     {
+      var body=jsonDecode(res.body);
+      print(body);
+      print(body["token"]);
+
+      await UserService.saveToken(body['token']) ;
       return "Success";
+
+
     }else
     {
       return "Veuillez vérifier le numéro de téléphone et le mot de passe";
@@ -100,6 +113,8 @@ class UserController extends GetxController{
 
 
   }
+
+
 
 
 }

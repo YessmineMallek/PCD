@@ -8,6 +8,7 @@ import 'package:train_truck/Screens/Login_Registration/Authentification.dart';
 import 'package:train_truck/Screens/Login_Registration/ChoicePage.dart';
 import 'package:train_truck/Screens/Providers/HeaderWidget.dart';
 import 'package:train_truck/Screens/Providers/logoWidget.dart';
+import 'package:train_truck/main.dart';
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -21,6 +22,9 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
+
     return  Scaffold(
       body: SingleChildScrollView(
         child: Column(children: [
@@ -130,6 +134,7 @@ class _LoginPageState extends State<LoginPage> {
 
                       ElevatedButton(onPressed: ()async{
                         var res=await userController.authenticate();
+                        print(res);
                         if(res=="Success")
                         {
                           Navigator.push(
@@ -139,13 +144,15 @@ class _LoginPageState extends State<LoginPage> {
                           );
                         }else
                         {
+                          if(res!=null){
 
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content:  Text(res.toString()),
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content:  Text(res.toString()),
 
-                            ),
-                          );
+                              ),
+                            );
+                          }
                         }
 
                       },
@@ -161,12 +168,13 @@ class _LoginPageState extends State<LoginPage> {
                             backgroundColor:
                             MaterialStateProperty.all(Theme.of(context).primaryColor),
                           ),
-                          child: Text(
-                            "S'authentifier",
-                            style: TextStyle(
-                                fontSize: 18,
-                                color: Colors.white,
-                                fontWeight: FontWeight.normal),
+                          child: Obx(()=>userController.isLoadingLogin.value==false?  Text(
+                              "S'authentifier",
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.normal),
+                            ):CircularProgressIndicator(color: Colors.white,),
                           ),),
                       SizedBox(height: 25.0),
 
@@ -178,7 +186,7 @@ class _LoginPageState extends State<LoginPage> {
                                 children: [
                                   Container(
                                     color: Theme.of(context).primaryColor,
-                                    width: (Get.width) / 3,
+                                    width: (width) / 3,
                                     height: 1,
                                   ),
                                   SizedBox(width: 25.0),
@@ -192,7 +200,7 @@ class _LoginPageState extends State<LoginPage> {
                                   SizedBox(width: 25.0),
                                   Container(
                                     color: Theme.of(context).primaryColor,
-                                    width: (Get.width) / 3,
+                                    width: (width) / 3,
                                     height: 1,
                                   ),
                                 ],
@@ -222,15 +230,15 @@ class _LoginPageState extends State<LoginPage> {
                                   backgroundColor:
                                   MaterialStateProperty.all(Theme.of(context).primaryColor),
                                 ),
-                                child: Obx(()=>userController.isLoadingLogin.value==false?
+                                child:
                                    Text(
                                     "S'inscrire",
                                     style: TextStyle(
                                         fontSize: 18,
                                         color: Colors.white,
                                         fontWeight: FontWeight.normal),
-                                   ):CircularProgressIndicator(),
-                                ),),
+                                   ),
+                                ),
 
 
                             ],

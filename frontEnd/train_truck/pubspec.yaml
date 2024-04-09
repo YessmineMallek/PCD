@@ -45,6 +45,8 @@ dependencies:
   flutter_osm_interface:
   flutter_map: ^6.1.0
   latlong2:
+  shared_preferences: ^2.0.8
+
 
 dev_dependencies:
   flutter_test:

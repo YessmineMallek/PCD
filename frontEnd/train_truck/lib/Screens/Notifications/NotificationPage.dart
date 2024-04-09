@@ -7,6 +7,8 @@ class NotificationPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -31,7 +33,7 @@ class NotificationPage extends StatelessWidget {
                         fontFamily: 'Oxygen',fontSize: 20)),
                     Container(
                       color: Theme.of(context).primaryColor,
-                      width: (Get.width) /1.8,
+                      width: (width) /1.8,
                       height: 2,
                     ),
                   ],)),

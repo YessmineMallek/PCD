@@ -31,8 +31,7 @@ class LigneFavorisCard extends StatelessWidget {
                 child: Row(
                   children: [
                     SizedBox(width: 15.0),
-                    Expanded(
-                      child: Row(
+                     Row(
                         children: [
                           SizedBox(width: 10.0,),
                           Icon(
@@ -57,7 +56,7 @@ class LigneFavorisCard extends StatelessWidget {
 
                         ],
                       ),
-                    ),
+
                   ],
                 ),
               ),
