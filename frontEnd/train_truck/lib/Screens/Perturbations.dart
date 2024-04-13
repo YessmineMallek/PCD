@@ -90,14 +90,14 @@ class _PerturbationsState extends State<Perturbations> {
                         ),
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      child: arrets.isNotEmpty
+                      child: arretsFav.isNotEmpty
                           ? ListView.builder(
-                        itemCount: arrets.length,
+                        itemCount: arretsFav.length,
                         itemBuilder: (context, index) {
                           return Column(
                             children: [
                               LigneFavorisCard(
-                                arret: arrets[index],
+                                arret: arretsFav[index],
                                 itemIndex: index,
                               ),
                             ],

@@ -98,15 +98,15 @@ class _Favoris_avec_resultatState extends State<Favoris_avec_resultat> {
                         ),
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      child: arrets.isNotEmpty
+                      child: arretsFav.isNotEmpty
                           ? Container(
                         child: ListView.builder(
-                          itemCount: arrets.length,
+                          itemCount: arretsFav.length,
                           itemBuilder: (context, index) {
                             return Column(
                               children: [
                                 FavorisCard(
-                                  arret: arrets[index],
+                                  arret: arretsFav[index],
                                   itemIndex: index,
                                   press: () {
                                     Navigator.push(
@@ -114,7 +114,7 @@ class _Favoris_avec_resultatState extends State<Favoris_avec_resultat> {
                                       MaterialPageRoute(
                                         builder: (context) =>
                                             DetailsScreen(
-                                              arret: arrets[index],
+                                              arret: arretsFav[index],
                                             ),
                                       ),
                                     );
@@ -178,21 +178,19 @@ class _Favoris_avec_resultatState extends State<Favoris_avec_resultat> {
                         ),
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      child: arrets.isNotEmpty
-                          ? Expanded(
-                        child: ListView.builder(
-                          itemCount: arrets.length,
+                      child: arretsFav.isNotEmpty ?  ListView.builder(
+                          itemCount: arretsFav.length,
                           itemBuilder: (context, index) {
                             return Column(
                               children: [
                                 LigneFavorisCard(
-                                  arret: arrets[index],
+                                  arret: arretsFav[index],
                                   itemIndex: index,
                                 ),
                               ],
                             );
                           },
-                        ),
+
                       ) :
                       Column(
                         children: [

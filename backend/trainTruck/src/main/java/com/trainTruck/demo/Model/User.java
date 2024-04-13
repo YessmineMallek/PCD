@@ -34,13 +34,14 @@ public class User implements UserDetails {
 	private Integer id_user ;
 	private String firstName;
 	private String lastName;
-	
 	@Column(unique=true)
 	private String phoneNumber;
-	
 	private String password_user;
 	@Enumerated(EnumType.STRING)
 	private Role role;
+	
+	private int activated;
+	
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -1,0 +1,36 @@
+package com.trainTruck.demo.Model;
+
+import java.util.List;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name="routes")
+public class Route {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int route_id;
+	 
+	@OneToMany(mappedBy = )
+	private List<Trip> trips; 
+	private int agancy_id;
+	private String route_short_name;
+	private String route_long_name;
+	private String route_desc;
+	private String route_type;
+	private String route_url;
+}

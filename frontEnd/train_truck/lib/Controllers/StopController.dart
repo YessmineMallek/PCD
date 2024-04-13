@@ -12,7 +12,9 @@ class StopController extends GetxController {
 
 
   findAllStops() async {
+
     final token = await UserService.getToken();
+
     var response = await stopService.getStops(token);
     if (response.statusCode == 200) {
       var listStops = jsonDecode(response.body);

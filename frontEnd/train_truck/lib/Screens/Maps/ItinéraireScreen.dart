@@ -3,6 +3,8 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:train_truck/Controllers/RouteController.dart';
+import 'package:train_truck/Controllers/StopController.dart';
 import 'package:train_truck/Screens/Favoris/Favoris_avec_resultat.dart';
 import 'package:train_truck/Screens/HorsLigne.dart';
 import 'package:train_truck/Screens/Maps/ItineraireCard.dart';
@@ -21,8 +23,13 @@ class ItineraireScreen extends StatefulWidget {
 
 class _ItineraireScreen extends State<ItineraireScreen> {
 
+  StopController stopController = Get.put(StopController());
+  RouteController routeController=Get.put(RouteController());
+
   @override
   Widget build(BuildContext context) {
+    stopController.findAllStops();
+
     return
          Stack(
             children: [
@@ -78,21 +85,20 @@ class _ItineraireScreen extends State<ItineraireScreen> {
                             ),
                           ],
                         ),
-                        SizedBox(height: 8.0),
                         Container(
-                          child: arrets.isNotEmpty
+                          child:  routeController.routes.isNotEmpty
                               ? Expanded(
-                            child: ListView.builder(
-                              itemCount: arrets.length,
+                            child: Obx (()=>ListView.builder(
+                              itemCount: routeController.routes.value.length,
                               itemBuilder: (context, index) {
                                 return Column(
                                   children: [
-                                    ItineraireCard(arret: arrets[index], itemIndex: index),
+                                   ItineraireCard(route: routeController.routes.value[index], itemIndex: index),
                                     SizedBox(height: 10.0),
                                   ],
                                 );
                               },
-                            ),
+                            )),
                           ):
                           Center(
                             child: Text(
@@ -116,23 +122,28 @@ class _ItineraireScreen extends State<ItineraireScreen> {
     return FlutterMap(
       options: MapOptions(
           initialCenter: LatLng( 35.821430, 10.634422),
-          initialZoom: 12,
+          initialZoom: 9,
           interactionOptions:
           const InteractionOptions(flags: ~InteractiveFlag.doubleTapZoom)),
-      children: [
-        openStreetMapTileLater,
-        MarkerLayer(markers:[
-          Marker(
-              point: LatLng(35.83333 , 10.6333308),
-              width: 40,
-              height: 40,
-              alignment: Alignment.centerLeft,
-              child: Icon(
-                Icons.location_pin,
-                size: 30,
-                color: Colors.red,
-              )),
-        ]),
+          children: [
+           openStreetMapTileLater,
+           Obx(
+              ()=> MarkerLayer(
+
+              markers: [
+                for(var item in stopController.stops.value )
+                  Marker(
+                      point: LatLng(item.stopLat, item.stopLon),
+                      width: 40,
+                      height: 40,
+                      alignment: Alignment.centerLeft,
+                      child: Icon(
+                        Icons.location_pin,
+                        size: 30,
+                        color: Colors.red,
+                      )),
+              ]),
+        ),
 
       ],
     );

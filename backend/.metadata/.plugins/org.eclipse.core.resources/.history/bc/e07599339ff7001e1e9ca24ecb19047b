@@ -1,0 +1,9 @@
+package com.trainTruck.demo.Repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.trainTruck.demo.Model.Route;
+
+public interface RouteRepo extends JpaRepository<Route, Integer> {
+
+}

@@ -11,13 +11,13 @@ import com.trainTruck.demo.Model.Stop;
 import com.trainTruck.demo.Service.StopService;
 
 @RestController
-@RequestMapping("/api/v1/Stops")
+@RequestMapping("/api/v1/stops")
 public class StopController {
 	
 	@Autowired 
 	StopService stopService;
 	
-	@GetMapping("/")
+	@GetMapping()
 	public List<Stop> getAll()
 	{
 		return stopService.getStops();

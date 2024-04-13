@@ -1,0 +1,19 @@
+package com.trainTruck.demo.Service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.trainTruck.demo.Model.Route;
+import com.trainTruck.demo.Repository.RouteRepo;
+import com.trainTruck.demo.Repository.Stop_times;
+
+public class Stop_timesService {
+
+	@Autowired 
+	Stop_timesService stopTimeService ;
+	
+	public List<Stop_times> findStopsTime() {
+		return routeRepo.findAll();
+	}
+}

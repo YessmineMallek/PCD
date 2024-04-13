@@ -14,7 +14,7 @@
     required this.image,
   });
 }
-List<Arret> arrets = [
+List<Arret> arretsFav = [
   Arret(
       id: 1,
       title: "Sousse Sud",

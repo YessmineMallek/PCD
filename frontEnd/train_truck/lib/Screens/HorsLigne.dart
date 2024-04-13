@@ -21,13 +21,13 @@ class _HorsLigneState extends State<HorsLigne> {
   void initState() {
     super.initState();
     setState(() {
-      _foundedArret = arrets;
+      _foundedArret = arretsFav;
     });
   }
 
   onSearch(String search) {
     setState(() {
-      _foundedArret = arrets
+      _foundedArret = arretsFav
           .where((Arret) => Arret.title.toLowerCase().contains(search))
           .toList();
       _showList = true;
@@ -152,9 +152,9 @@ class _HorsLigneState extends State<HorsLigne> {
                       itemBuilder: (context, index) {
                         return Column(
                           children: [
-                            ItineraireCard(
-                                arret: _foundedArret[index],
-                                itemIndex: index),
+                           /* ItineraireCard(
+                                Route: _foundedArret[index],
+                                itemIndex: index),*/
                             SizedBox(
                                 height:
                                 10.0),

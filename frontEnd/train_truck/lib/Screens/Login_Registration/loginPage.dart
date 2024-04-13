@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:train_truck/Controllers/UserController.dart';
@@ -32,9 +33,9 @@ class _LoginPageState extends State<LoginPage> {
           LogoWidget(),
 
             Container(
-                padding: EdgeInsets.symmetric(vertical: 30,horizontal: 30),
+                padding: EdgeInsets.symmetric(horizontal: 30),
                 child: Form(
-                  key: UserController.loginFormKey,
+                  key: userController.loginFormKey,
                   child: Column(
                     children: <Widget>[
 
@@ -73,7 +74,7 @@ class _LoginPageState extends State<LoginPage> {
 
                     //mot de passe
                       Container(
-                        margin: EdgeInsets.only(top:30),
+                        margin: EdgeInsets.only(top:20),
                         height: 48,
                         child: TextFormField(
                           obscureText: userController.obscure.value,
@@ -186,7 +187,7 @@ class _LoginPageState extends State<LoginPage> {
                                 children: [
                                   Container(
                                     color: Theme.of(context).primaryColor,
-                                    width: (width) / 3,
+                                    width: (width) / 4,
                                     height: 1,
                                   ),
                                   SizedBox(width: 25.0),
@@ -200,14 +201,15 @@ class _LoginPageState extends State<LoginPage> {
                                   SizedBox(width: 25.0),
                                   Container(
                                     color: Theme.of(context).primaryColor,
-                                    width: (width) / 3,
+                                    width: (width) / 4,
                                     height: 1,
                                   ),
                                 ],
                               ),
                               SizedBox(height: 15.0),
 
-                              Text("Pas encore de compte? Ouvrez le vôtre maintenant"),
+                              Center(
+                                  child: Text("Pas encore de compte? Ouvrez le vôtre maintenant",textAlign: TextAlign.center,)),
                               SizedBox(height: 15.0),
 
                               ElevatedButton(onPressed: (){

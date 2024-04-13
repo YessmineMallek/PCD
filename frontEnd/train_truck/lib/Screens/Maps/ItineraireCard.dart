@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:train_truck/Models/Arret.dart';
-
 class ItineraireCard extends StatelessWidget {
-  const ItineraireCard({
+   ItineraireCard({
     Key? key,
     required this.itemIndex,
-    required this.arret,
+    required this.route,
   }) : super(key: key);
 
-  final int itemIndex;
-  final Arret arret;
+  final  itemIndex;
+  final  route;
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.symmetric(horizontal: 10),
       width: 370,
       height: 40,
       decoration: BoxDecoration(
@@ -26,7 +25,7 @@ class ItineraireCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              arret.title,
+              route.routeLongName,
               style: TextStyle(
                 color: Colors.black87,
                 fontWeight: FontWeight.bold,
@@ -37,12 +36,12 @@ class ItineraireCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  arret.heure,
+                  "",
                   style: TextStyle(color: Colors.black87),
                 ),
                 Text(
-                  arret.etat,
-                  style: TextStyle(color: Colors.red),
+                      ""
+                  ,style: TextStyle(color: Colors.red),
                 ),
               ],
             ),

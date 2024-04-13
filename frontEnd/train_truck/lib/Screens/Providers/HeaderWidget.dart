@@ -11,14 +11,7 @@ class HeaderWidget extends StatelessWidget {
     return  Stack(children: [
       Image.asset("assets/images/entete.png"),
 
-      Container(
-          padding: EdgeInsets.symmetric(vertical: 40),
-          child: IconButton(onPressed: (){
-            Navigator.pop(context);
 
-          },
-              icon: Icon(Icons.arrow_back_ios_new_sharp,
-                color: Colors.black,)))
     ]);
   }
 }
