@@ -3,8 +3,8 @@ import 'package:train_truck/Models/Arret.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:train_truck/Models/Arret.dart';
-import 'package:train_truck/Screens/Itin%C3%A9raireScreen.dart';
-import 'package:train_truck/Screens/ItineraireCard.dart';
+import 'package:train_truck/Screens/Maps/Itin%C3%A9raireScreen.dart';
+import 'package:train_truck/Screens/Maps/ItineraireCard.dart';
 
 class HorsLigne extends StatefulWidget {
   const HorsLigne({Key? key}) : super(key: key);
@@ -21,13 +21,13 @@ class _HorsLigneState extends State<HorsLigne> {
   void initState() {
     super.initState();
     setState(() {
-      _foundedArret = arrets;
+      _foundedArret = arretsFav;
     });
   }
 
   onSearch(String search) {
     setState(() {
-      _foundedArret = arrets
+      _foundedArret = arretsFav
           .where((Arret) => Arret.title.toLowerCase().contains(search))
           .toList();
       _showList = true;
@@ -41,19 +41,15 @@ class _HorsLigneState extends State<HorsLigne> {
           children: [
             Stack(
               children: [
-                Image.asset("Assets/images/entete.png"),
+                Image.asset("assets/images/entete.png"),
                 Container(
                   padding: EdgeInsets.symmetric(vertical: 50),
                   child: Row(
                     children: [
                       IconButton(
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ItineraireScreen()),
-                          );
-                        },
+                            Navigator.of(context).pop();
+                          },
                         icon: Icon(
                           Icons.arrow_back_ios_new_sharp,
                           color: Colors.black,
@@ -152,9 +148,9 @@ class _HorsLigneState extends State<HorsLigne> {
                       itemBuilder: (context, index) {
                         return Column(
                           children: [
-                            ItineraireCard(
-                                arret: _foundedArret[index],
-                                itemIndex: index),
+                           /* ItineraireCard(
+                                Route: _foundedArret[index],
+                                itemIndex: index),*/
                             SizedBox(
                                 height:
                                 10.0),

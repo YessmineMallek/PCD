@@ -6,7 +6,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:train_truck/Screens/DetailsScreen.dart';
 import 'package:train_truck/Screens/Favoris/FavorisArretCard.dart';
 import 'package:train_truck/Screens/Favoris/LigneFavorisCard.dart';
-import 'package:train_truck/Screens/Itin%C3%A9raireScreen.dart';
+import 'package:train_truck/Screens/Maps/Itin%C3%A9raireScreen.dart';
 
 class Favoris_avec_resultat extends StatefulWidget {
   const Favoris_avec_resultat({Key? key});
@@ -20,25 +20,21 @@ class _Favoris_avec_resultatState extends State<Favoris_avec_resultat> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
+   return  Scaffold(
+
+       body:SingleChildScrollView(
         child: Column(
           children: [
             Stack(
               children: [
-                Image.asset("Assets/images/entete.png"),
+                Image.asset("assets/images/entete.png"),
                 Container(
                   padding: EdgeInsets.symmetric(vertical: 50),
                   child: Row(
                     children: [
                       IconButton(
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => ItineraireScreen(),
-                            ),
-                          );
+                          Navigator.of(context).pop();
                         },
                         icon: Icon(
                           Icons.arrow_back_ios_new_sharp,
@@ -102,15 +98,15 @@ class _Favoris_avec_resultatState extends State<Favoris_avec_resultat> {
                         ),
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      child: arrets.isNotEmpty
-                          ? Expanded(
+                      child: arretsFav.isNotEmpty
+                          ? Container(
                         child: ListView.builder(
-                          itemCount: arrets.length,
+                          itemCount: arretsFav.length,
                           itemBuilder: (context, index) {
                             return Column(
                               children: [
                                 FavorisCard(
-                                  arret: arrets[index],
+                                  arret: arretsFav[index],
                                   itemIndex: index,
                                   press: () {
                                     Navigator.push(
@@ -118,7 +114,7 @@ class _Favoris_avec_resultatState extends State<Favoris_avec_resultat> {
                                       MaterialPageRoute(
                                         builder: (context) =>
                                             DetailsScreen(
-                                              arret: arrets[index],
+                                              arret: arretsFav[index],
                                             ),
                                       ),
                                     );
@@ -182,21 +178,19 @@ class _Favoris_avec_resultatState extends State<Favoris_avec_resultat> {
                         ),
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      child: arrets.isNotEmpty
-                          ? Expanded(
-                        child: ListView.builder(
-                          itemCount: arrets.length,
+                      child: arretsFav.isNotEmpty ?  ListView.builder(
+                          itemCount: arretsFav.length,
                           itemBuilder: (context, index) {
                             return Column(
                               children: [
                                 LigneFavorisCard(
-                                  arret: arrets[index],
+                                  arret: arretsFav[index],
                                   itemIndex: index,
                                 ),
                               ],
                             );
                           },
-                        ),
+
                       ) :
                       Column(
                         children: [
@@ -223,7 +217,7 @@ class _Favoris_avec_resultatState extends State<Favoris_avec_resultat> {
             )
           ],
         ),
-      ),
+   )
     );
   }
 }

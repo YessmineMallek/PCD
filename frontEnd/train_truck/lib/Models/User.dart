@@ -3,14 +3,16 @@ class User {
   String? lastName;
   String? passwordUser;
   String? phoneNumber;
+  int? activated;
 
-  User({this.firstName, this.lastName, this.passwordUser, this.phoneNumber});
+  User({this.firstName, this.lastName, this.passwordUser, this.phoneNumber,this.activated});
 
   User.fromJson(Map<String, dynamic> json) {
     firstName = json['firstName'];
     lastName = json['lastName'];
     passwordUser = json['password_user'];
     phoneNumber = json['phoneNumber'];
+    activated =json['activated'];
   }
 
   Map<String, dynamic> toJson() {

@@ -1,5 +1,0 @@
-package com.trainTruck.demo.Repository;
-
-public interface StationRepo {
-
-}

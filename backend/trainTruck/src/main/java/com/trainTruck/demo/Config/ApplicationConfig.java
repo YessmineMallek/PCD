@@ -30,7 +30,7 @@ public class ApplicationConfig {
 			@Override
 			public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 				// TODO Auto-generated method stub
-				return userRepo.findByPhoneNumber(username).
+				return userRepo.findByPhoneNumberAndActivated(username,1).
 						orElseThrow(()-> new UsernameNotFoundException("User not found!")) ;
 			}
 		};

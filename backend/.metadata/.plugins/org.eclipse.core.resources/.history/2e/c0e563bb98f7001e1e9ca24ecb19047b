@@ -1,0 +1,18 @@
+package com.trainTruck.demo.Model;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name="routes")
+public class Route {
+	route_id, agancy_id, route_short_name, route_long_name, route_desc, route_type, route_url
+}

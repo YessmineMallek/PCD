@@ -34,6 +34,7 @@ public class AuthenticationService {
 				.lastName(request.getLastName())
 				.phoneNumber(request.getPhoneNumber())
 				.password_user(passwordEncoder.encode(request.getPassword_user()))
+				.activated(request.getActivated())
 				.role(com.trainTruck.demo.Model.Role.USER)
 				.build();
 		try {
@@ -61,7 +62,7 @@ public class AuthenticationService {
 				new UsernamePasswordAuthenticationToken(request.getPhoneNumber(), request.getPassword_user())
 				);
 		
-		var user =userRepo.findByPhoneNumber(request.getPhoneNumber()).orElseThrow();
+		var user =userRepo.findByPhoneNumberAndActivated(request.getPhoneNumber(),1).orElseThrow();
 		var jwtToken=jwtService.generateToken(user);
 		return AuthenticationResponse.builder().token(jwtToken).build();		
 	}

@@ -1,0 +1,20 @@
+package com.trainTruck.demo.Service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.trainTruck.demo.Model.User;
+import com.trainTruck.demo.Repository.UserRepository;
+
+@Service
+public class UserService {
+
+	
+	@Autowired
+	private UserRepository userRepo;
+	
+	public User updateUser(User userToUdate,String phoneNumber)
+	{
+		User user=userRepo.findByPhoneNumberAndActivated(phoneNumber, );
+	}
+}

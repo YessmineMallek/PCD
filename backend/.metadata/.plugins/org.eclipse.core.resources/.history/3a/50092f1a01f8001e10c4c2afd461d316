@@ -1,0 +1,44 @@
+package com.trainTruck.demo.Controller;
+
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.List;
+import java.util.Set;
+
+import org.opentripplanner.client.OtpApiClient;
+import org.opentripplanner.client.model.Coordinate;
+import org.opentripplanner.client.model.RequestMode;
+import org.opentripplanner.client.model.Route;
+import org.opentripplanner.client.model.TripPlan;
+import org.opentripplanner.client.parameters.TripPlanParameters;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/api/v1/demo-controller")
+public class DemoController {
+	
+	
+
+	@GetMapping
+	public ResponseEntity<TripPlan> sayHello() throws IOException
+	{
+		Coordinate ORIGIN = new Coordinate(52.4885, 13.3398);
+		Coordinate DEST = new Coordinate(52.5211, 13.4106);
+		OtpApiClient client = new OtpApiClient(ZoneId.of("Africa/Tunisia"), "http://localhost:8080/");
+
+		var result = client.plan(
+		      TripPlanParameters.builder()
+		        .withFrom(ORIGIN)
+		        .withTo(DEST)
+		        .withTime(LocalDateTime.now())
+		        .withModes(Set.of(RequestMode.TRANSIT))
+		        .build()
+		    );
+		return ResponseEntity.ok(result);
+	}
+
+}

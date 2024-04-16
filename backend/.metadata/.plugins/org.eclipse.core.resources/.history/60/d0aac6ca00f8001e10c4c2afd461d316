@@ -1,0 +1,38 @@
+package com.trainTruck.demo.Controller;
+
+import java.io.IOException;
+import java.time.ZoneId;
+import java.util.List;
+
+import org.opentripplanner.client.OtpApiClient;
+import org.opentripplanner.client.model.Coordinate;
+import org.opentripplanner.client.model.Route;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/api/v1/demo-controller")
+public class DemoController {
+	
+	
+
+	@GetMapping
+	public ResponseEntity<String> sayHello()
+	{
+		Coordinate ORIGIN = new Coordinate(52.4885, 13.3398);
+		Coordinate DEST = new Coordinate(52.5211, 13.4106);
+		OtpApiClient client = new OtpApiClient(ZoneId.of("Europe/Berlin"), "https://example.com");
+
+		var result = client.plan(
+		      TripPlanParameters.builder()
+		        .withFrom(ORIGIN)
+		        .withTo(DEST)
+		        .withTime(LocalDateTime.now())
+		        .withModes(Set.of(RequestMode.TRANSIT))
+		        .build()
+		    );
+	}
+
+}

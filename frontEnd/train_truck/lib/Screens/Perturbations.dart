@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:train_truck/Models/Arret.dart';
 import 'package:train_truck/Screens/Favoris/LigneFavorisCard.dart';
-import 'package:train_truck/Screens/Itin%C3%A9raireScreen.dart';
+import 'package:train_truck/Screens/Maps/Itin%C3%A9raireScreen.dart';
 
 
 class Perturbations extends StatefulWidget {
@@ -22,18 +22,14 @@ class _PerturbationsState extends State<Perturbations> {
           children: [
             Stack(
               children: [
-                Image.asset("Assets/images/entete.png"),
+                Image.asset("assets/images/entete.png"),
                 Container(
                   padding: EdgeInsets.symmetric(vertical: 50),
                   child: Row(
                     children: [
                       IconButton(
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ItineraireScreen()),
-                          );
+                            Navigator.of(context).pop();
                         },
                         icon: Icon(
                           Icons.arrow_back_ios_new_sharp,
@@ -90,14 +86,14 @@ class _PerturbationsState extends State<Perturbations> {
                         ),
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      child: arrets.isNotEmpty
+                      child: arretsFav.isNotEmpty
                           ? ListView.builder(
-                        itemCount: arrets.length,
+                        itemCount: arretsFav.length,
                         itemBuilder: (context, index) {
                           return Column(
                             children: [
                               LigneFavorisCard(
-                                arret: arrets[index],
+                                arret: arretsFav[index],
                                 itemIndex: index,
                               ),
                             ],

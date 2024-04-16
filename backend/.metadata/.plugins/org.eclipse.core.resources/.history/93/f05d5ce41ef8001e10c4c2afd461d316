@@ -1,0 +1,7 @@
+package com.trainTruck.demo.Repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface Stop_times extends JpaRepository<Stop_times, Integer> {
+
+}
