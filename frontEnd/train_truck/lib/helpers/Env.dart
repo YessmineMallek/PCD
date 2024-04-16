@@ -1,4 +1,4 @@
 class Env {
 
-  String ipAdresse = "http://192.168.1.122:8090";
+  String ipAdresse = "http://192.168.1.65:8080";
 }

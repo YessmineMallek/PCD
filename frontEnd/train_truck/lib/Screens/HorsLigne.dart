@@ -48,12 +48,8 @@ class _HorsLigneState extends State<HorsLigne> {
                     children: [
                       IconButton(
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ItineraireScreen()),
-                          );
-                        },
+                            Navigator.of(context).pop();
+                          },
                         icon: Icon(
                           Icons.arrow_back_ios_new_sharp,
                           color: Colors.black,

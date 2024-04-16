@@ -27,7 +27,7 @@ public class DemoController {
 	public ResponseEntity<TripPlan> sayHello() throws IOException
 	{
 		Coordinate ORIGIN = new Coordinate(36.79476927,10.18038057);
-		Coordinate DEST = new Coordinate(36.69827887,10.42151708);
+		Coordinate DEST = new Coordinate(36.79476927, 10.18038057);
 		OtpApiClient client = new OtpApiClient(ZoneId.of("Africa/Tunis"), "http://localhost:8080");
 
 		var result = client.plan(

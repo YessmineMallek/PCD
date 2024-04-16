@@ -6,12 +6,22 @@ import 'package:train_truck/Screens/Login_Registration/ChoicePage.dart';
 import 'package:train_truck/Screens/Login_Registration/SplashScreen.dart';
 
 import 'package:train_truck/Screens/Maps/MapScreen.dart';
+import 'package:wifi_iot/wifi_iot.dart';
 
 void main() {
   runApp( MyApp());
 }
 
 class MyApp extends StatelessWidget {
+
+  void _enableWiFi() async {
+    try {
+      await WiFiForIoTPlugin.setEnabled(true);
+      print('Wi-Fi activé avec succès.');
+    } catch (e) {
+      print('Erreur lors de l\'activation du Wi-Fi : $e');
+    }
+  }
   MyApp({super.key});
   final Color _primaryColor = HexColor('#62A39F');
 
@@ -19,6 +29,8 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    _enableWiFi();
+
     return GetMaterialApp(
       theme:ThemeData(
           primaryColor: _primaryColor
