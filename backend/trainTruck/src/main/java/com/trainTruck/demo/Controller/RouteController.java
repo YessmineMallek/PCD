@@ -23,9 +23,14 @@ public class RouteController {
 	{
 		return routeService.findRoutes();
 	}
-	@GetMapping("/{agencyId}")
+	@GetMapping("/agence/{agencyId}")
 	public List<Route> getRoutesByAgencyID(@PathVariable(value="agencyId") int id)
 	{
 		return routeService.findRoutesByAgencyId(id);
+	}
+	@GetMapping("/{routeId}")
+	public Route getRoute(@PathVariable(value="routeId") int id)
+	{
+		return routeService.findRoute(id);
 	}
 }

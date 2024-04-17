@@ -27,17 +27,15 @@ public class Trip {
 	
 	@Id
 	private  String trip_id;
-	
-	@JsonIgnoreProperties({"trips","hibernateLazyInitializer"})
 	@ManyToOne
-	 @JoinColumn(name = "route_id")
+	@JoinColumn(name = "route_id")
 	 private Route route_id;
-	
 	private int service_id;
-	 
 	private String trip_headsign;
-	 
 	private String trip_short_name;
+	@JsonIgnoreProperties({"stopsTime","route_id","trip_id"})
+	@OneToMany(mappedBy = "trip_id")
+	private List<StopTimes> stopsTime;
 	
 
 	

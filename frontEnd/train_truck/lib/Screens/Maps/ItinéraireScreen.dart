@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:get/get.dart';
@@ -33,84 +34,98 @@ class _ItineraireScreen extends State<ItineraireScreen> {
     return
          Stack(
             children: [
+
               content(),
+              Positioned(
+                top: 20,
+                child: IconButton(
+                    onPressed: (){
+                      Navigator.of(context).pop();
+
+                    }, icon: Icon(Icons.arrow_back_outlined,color: Colors.black,)),
+              ),
               Positioned(
                 bottom: 0,
                 left: 0,
                 right: 0,
                 child: Container(
                   height: 300,
-                  decoration: BoxDecoration(
-                    color: HexColor('#62A39F').withOpacity(0.9),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
 
-                  child: Center(
+                  child: Card(
+                    shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(30),
+                          topRight: Radius.circular(30),
+                        )),
+                    elevation: 4,
+
+                    color:  HexColor('#62A39F').withOpacity(0.9),
+                    child: Center(
                     child: Column(
-                      children: [
-                        Row(
-                          children: [
-                            SizedBox(width: 60.0),
-                            IconButton(onPressed: (){
-                              Get.to(()=>Favoris_avec_resultat());
-                            },
-                                icon: Icon(Icons.star_border,
-                                  color: Colors.white,
-
-                                )
-                            ),
-                            SizedBox(width: 50.0),
-                            IconButton(onPressed: (){
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>  HorsLigne()),
-                              );
-
-                            },
-                                icon: Icon(Icons.timer_sharp,
-                                  color: Colors.white,)
-                            ),
-                            SizedBox(width: 50.0),
-                            IconButton(onPressed: (){
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>  Perturbations()),
-                              );
-
-                            },
-                                icon: Icon(Icons.error_outline,
-                                  color: Colors.white,)
-                            ),
-                          ],
-                        ),
-                        Container(
-                          child:  routeController.routes.isNotEmpty
-                              ? Expanded(
-                            child: Obx (()=>ListView.builder(
-                              itemCount: routeController.routes.value.length,
-                              itemBuilder: (context, index) {
-                                return Column(
-                                  children: [
-                                   ItineraireCard(route: routeController.routes.value[index], itemIndex: index),
-                                    SizedBox(height: 10.0),
-                                  ],
-                                );
+                        children: [
+                          Row(
+                            children: [
+                              SizedBox(width: 60.0),
+                              IconButton(onPressed: (){
+                                Get.to(()=>Favoris_avec_resultat());
                               },
-                            )),
-                          ):
-                          Center(
-                            child: Text(
-                              "Aucune Station trouvée",
-                              style: TextStyle(fontSize: 15,color: Colors.black87
+                                  icon: Icon(Icons.star_border,
+                                    color: Colors.white,
+
+                                  )
+                              ),
+                              SizedBox(width: 50.0),
+                              IconButton(onPressed: (){
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>  HorsLigne()),
+                                );
+
+                              },
+                                  icon: Icon(Icons.timer_sharp,
+                                    color: Colors.white,)
+                              ),
+                              SizedBox(width: 50.0),
+                              IconButton(onPressed: (){
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>  Perturbations()),
+                                );
+
+                              },
+                                  icon: Icon(Icons.error_outline,
+                                    color: Colors.white,)
+                              ),
+                            ],
+                          ),
+                          Container(
+                            child:  routeController.routes.isNotEmpty
+                                ? Expanded(
+                              child: Obx (()=>ListView.builder(
+                                itemCount: routeController.routes.value.length,
+                                itemBuilder: (context, index) {
+                                  return Column(
+                                    children: [
+                                      ItineraireCard(route: routeController.routes.value[index], itemIndex: index),
+                                      SizedBox(height: 10.0),
+                                    ],
+                                  );
+                                },
+                              )),
+                            ):
+                            Center(
+                              child: Text(
+                                "Aucune Station trouvée",
+                                style: TextStyle(fontSize: 15,color: Colors.black87
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                ]
-                  ),
-                ),
+                        ]
+                    ),
+                  ),)
               ),
       ),
       ],

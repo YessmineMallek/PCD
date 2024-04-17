@@ -23,22 +23,24 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="stop_times")
+@Table(name="stops_times")
 public class StopTimes {
 	@Id
-	private int stopTimesId=0;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name="stoptimesid")
+	private int stopTimesId;
 	
 	
-	@JsonIgnoreProperties({"stopsTime","route_id"})
+	@JsonIgnoreProperties({"stopsTime","route_id","trip_id"})
 	@ManyToOne
 	@JoinColumn(name = "trip_id")
 	private Trip trip_id;
-	
+	@Column(name="arrival_time")
 	private String arrival_time;
+	@Column(name="departure_time")
 	private String departure_time;
 	
-	@JsonIgnoreProperties("stopsTime")
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne
 	@JoinColumn(name = "stop_id")
 	private Stop stop_id;
 	
