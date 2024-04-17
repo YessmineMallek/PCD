@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:train_truck/Screens/DetailsScreen.dart';
 import 'package:train_truck/Screens/Bottom.dart';
 import 'package:train_truck/Screens/Login_Registration/ChoicePage.dart';
 import 'package:train_truck/Screens/Login_Registration/SplashScreen.dart';
@@ -37,7 +38,7 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       title: 'Train Truck',
-      home: SplashScreen(),
+      home: DetailsScreen(arret: null,),
     );
   }
 }
