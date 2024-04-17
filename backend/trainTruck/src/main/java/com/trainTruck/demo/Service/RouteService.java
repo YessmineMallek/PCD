@@ -19,4 +19,7 @@ public class RouteService {
 	public List<Route> findRoutesByAgencyId(int id) {
 		return routeRepo.findByAgancy(id);
 	}
+	public Route findRoute(int id) {
+		return routeRepo.findById(id).orElseThrow();
+	}
 }

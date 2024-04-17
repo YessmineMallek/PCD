@@ -9,6 +9,7 @@ class RouteController extends GetxController{
   RouteService routeService =RouteService();
   RxList routes=[].obs;
   var isLoading=false.obs;
+  var routeDetail=Route().obs;
 
 
   findRoutesByAgency(id)async

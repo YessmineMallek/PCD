@@ -12,6 +12,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -32,6 +33,10 @@ public class Route {
 	private int route_id;
 	@Column(name="agancy_id")
 	private int agancy;
+	@JsonIgnoreProperties("route_id")
+	@OneToMany(mappedBy = "route_id")
+	private List<Trip> trips;
+	
 	private String route_short_name;
 	private String route_long_name;
 
