@@ -5,11 +5,14 @@ class Route {
   int? agancy;
   String? routeShortName=" ";
   String? routeLongName=" ";
+  List<Trip>? trip;
+
 
   Route(
       {this.routeId,
          this.agancy,
-         this.routeShortName,
+        this.trip,
+        this.routeShortName,
          this.routeLongName});
 
   Route.fromJson(Map<String, dynamic> json) {
@@ -17,6 +20,13 @@ class Route {
     agancy = json['agancy'];
     routeShortName = json['route_short_name'];
     routeLongName = json['route_long_name'];
+
+    if (json['trips'] != null) {
+      trip = <Trip>[];
+      json['trips'].forEach((v) {
+        trip!.add(new Trip.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {

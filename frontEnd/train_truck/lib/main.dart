@@ -4,6 +4,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:train_truck/Screens/Bottom.dart';
 import 'package:train_truck/Screens/Login_Registration/ChoicePage.dart';
 import 'package:train_truck/Screens/Login_Registration/SplashScreen.dart';
+import 'package:train_truck/Screens/Login_Registration/loginPage.dart';
 
 import 'package:train_truck/Screens/Maps/MapScreen.dart';
 import 'package:wifi_iot/wifi_iot.dart';
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    _enableWiFi();
+     _enableWiFi();
 
     return GetMaterialApp(
       theme:ThemeData(

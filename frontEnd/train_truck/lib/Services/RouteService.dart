@@ -5,7 +5,7 @@ class RouteService
 {
     getRoutesByAgency(jwt,idAgency)async
     {
-      String baseUrl = "${Env().ipAdresse}/api/v1/routes/${idAgency}";
+      String baseUrl = "${Env().ipAdresse}/api/v1/routes/agence/${idAgency}";
       try
       {
         final res = await http.get(
