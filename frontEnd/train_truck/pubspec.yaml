@@ -48,7 +48,9 @@ dependencies:
   shared_preferences:
   lottie:
   wifi_iot:
-  google_fonts: ^6.2.1
+  path_provider:
+  image_picker:
+  google_fonts: ^5.1.0
 
 
 

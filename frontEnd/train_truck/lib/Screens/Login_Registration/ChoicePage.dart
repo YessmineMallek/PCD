@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:train_truck/Controllers/RouteController.dart';
 import 'package:train_truck/Screens/Bottom.dart';
+import 'package:train_truck/Screens/Login_Registration/glowing_buttons.dart';
 import 'package:train_truck/Screens/Maps/Itin%C3%A9raireScreen.dart';
 import 'package:train_truck/Screens/Maps/MapScreen.dart';
 import 'package:train_truck/Screens/Providers/HeaderWidget.dart';
@@ -25,50 +26,24 @@ class ChoicePage extends StatelessWidget {
             HeaderWidget(),
             SizedBox(height:100),
 
-           InkWell(
-             onTap: ()=>{value=3},
-             child:  Container(
-                height: height/10,
-                padding: EdgeInsets.symmetric(vertical: 15,horizontal: 15),
-                width: width/1.5,
-                decoration:BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: primaryColor.withOpacity(0.2)
-                ) ,
-                child: Text("Grand lignes",style: TextStyle(color: Colors.black,fontSize: 20,fontWeight: FontWeight.bold)),
+            InkWell(
+              onTap: ()=>{value=3},
+              child: GlowingButton(
+                text: "Grand lignes",
               ),
-           ),
-            SizedBox(height:60),
-           InkWell(
-             onTap: ()=>{value=2},
-             child:Container(
-                height: height/10,
-                padding: EdgeInsets.symmetric(vertical: 15,horizontal: 15),
-                width: width/1.5,
-                decoration:BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    color: primaryColor.withOpacity(0.2)
-                ) ,
-                child: Text("Banlieue Sud",style: TextStyle(color: Colors.black,fontSize: 20,fontWeight: FontWeight.bold)),
-
-             ),
-           ),
-            SizedBox(height:60),
-
+            ),
+            SizedBox(height:30),
+            InkWell(
+              onTap: ()=>{value=2},
+              child: GlowingButton(
+                text: "Banlieue Sud",
+              ),
+            ),
+            SizedBox(height:30),
             InkWell(
               onTap: ()=>{value=1},
-
-              child: Container(
-                height: height/10,
-                padding: EdgeInsets.all(15),
-                width: width/1.5,
-                decoration:BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    color: primaryColor.withOpacity(0.2)
-                ) ,
-                child: Text("Sahel",style: TextStyle(color: Colors.black,fontSize: 20,fontWeight: FontWeight.bold)
-
-                ),
+              child: GlowingButton(
+                text: "Sahel",
               ),
             ),
             SizedBox(height:30),
