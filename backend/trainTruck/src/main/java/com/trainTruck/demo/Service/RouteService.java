@@ -22,4 +22,19 @@ public class RouteService {
 	public Route findRoute(int id) {
 		return routeRepo.findById(id).orElseThrow();
 	}
+	
+	public Route findRouteByLongName(String destination,String origine) {
+		String longName=destination.toLowerCase().concat("-".concat(origine.toLowerCase()));
+		Route route= routeRepo.findByRouteLongName(longName);
+		
+		if(route==null)
+		{
+			longName=origine.toLowerCase().concat("-".concat(destination.toLowerCase()));
+			System.out.println(longName);
+
+			route=routeRepo.findByRouteLongName(longName);		
+		}
+		return route;
+		
+	}
 }

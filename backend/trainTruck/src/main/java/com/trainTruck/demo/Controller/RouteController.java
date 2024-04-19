@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.trainTruck.demo.Model.Route;
 import com.trainTruck.demo.Service.RouteService;
-@CrossOrigin(origins = "192.168.1.65", maxAge = 3600)
 @RestController
 @RequestMapping("/api/v1/routes")
 public class RouteController {
@@ -33,5 +32,13 @@ public class RouteController {
 	public Route getRoute(@PathVariable(value="routeId") int id)
 	{
 		return routeService.findRoute(id);
+	}
+	@GetMapping("/{destination}/{origine}")
+	public Route getRouteByDestinationOrigine(@PathVariable(value="destination") String destination,@PathVariable(value="origine") String origine)
+	{
+		
+		Route  route= routeService.findRouteByLongName(destination,origine);
+		System.out.println(route);
+		return route;
 	}
 }
