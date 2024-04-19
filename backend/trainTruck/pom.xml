@@ -79,7 +79,9 @@
    			 <artifactId>otp-client</artifactId>
    			 <version>0.0.18</version>
 		</dependency>
+		
 	</dependencies>
+	
 
 	<build>
 		<plugins>

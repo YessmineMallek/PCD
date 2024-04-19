@@ -1,0 +1,4 @@
+FROM openjdk17-oracle
+COPY target/*.jar trainTruck.jar
+EXPOSE 8080
+ENTRYPOINT ["java","-jar","trainTruck.jar"]
