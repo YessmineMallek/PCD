@@ -262,3 +262,34 @@ class _DetailRoutesPageState extends State<DetailRoutesPage> {
     }
 
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                         // Text(
+                         // "A partir de: ",
+                         // style: TextStyle(
+                          //  color: grey,
+                          //  fontSize: 15,
+                          //  fontWeight: FontWeight.w500,
+                        //  ),
+                       // ),
+
+                        //  validator: (val) {
+                         //   if (val == null || val.isEmpty) {
+                          //    return "Veuillez saisir votre départ";
+                          //  }
+                         //   return null;
+                        //  },
+                      // ),

@@ -10,9 +10,9 @@ class RouteController extends GetxController{
   RxList routes=[].obs;
   var isLoading=false.obs;
   var routeDetail=Route().obs;
+  var searchDetail=Route().obs;
 
-
-  findRoutesByAgency(id)async
+  findRoutesByAgency(int id)async
   {
     isLoading.value=true;
 
