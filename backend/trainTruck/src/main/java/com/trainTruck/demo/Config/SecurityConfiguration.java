@@ -22,7 +22,7 @@ public class SecurityConfiguration {
 	private final AuthenticationProvider authenticationProvider;
 
 	@Bean
-	public SecurityFilterChain securityFilterChain(HttpSecurity http )throws Exception
+	 SecurityFilterChain securityFilterChain(HttpSecurity http )throws Exception
 	{
 		/*http
 		.csrf()
@@ -40,19 +40,18 @@ public class SecurityConfiguration {
 		.addFilterBefore(jwtAuthFilter,UsernamePasswordAuthenticationFilter.class);
 		
 		return http.build();*/
-		
 		http
-	    .csrf().disable()
-	    .authorizeRequests()
-	    .requestMatchers("/**").permitAll()
-	    .anyRequest().authenticated()
-	    .and()
-	    .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-	    .and()
-	    .authenticationProvider(authenticationProvider)
-	    .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+        .csrf().disable()
+        .authorizeRequests()
+            .requestMatchers("/**").permitAll()
+            .anyRequest().authenticated()
+        .and()
+        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+        .and()
+        .authenticationProvider(authenticationProvider)
+        .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
-	return http.build();
+    return http.getOrBuild();
 	
 	}
 

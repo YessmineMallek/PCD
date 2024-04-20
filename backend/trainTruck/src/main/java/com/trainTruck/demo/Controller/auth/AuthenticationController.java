@@ -1,5 +1,6 @@
 package com.trainTruck.demo.Controller.auth;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,12 +16,13 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AuthenticationController {
 	
-	private final AuthenticationService service;
+	@Autowired
+	private  AuthenticationService service;
 	@PostMapping("/register")
 	public ResponseEntity<AuthenticationResponse> register (@RequestBody RegisterRequest request)
 	{
 		System.out.println(request);
-		var res=service.register(request);
+		AuthenticationResponse res=service.register(request);
 		if(res.getToken()==null)
 		{
 			return ResponseEntity.status(409).body(res);

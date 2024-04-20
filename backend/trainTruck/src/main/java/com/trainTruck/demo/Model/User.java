@@ -29,6 +29,10 @@ import lombok.NoArgsConstructor;
 @Table(name="user_profile")
 public class User implements UserDetails {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id_user ;
@@ -72,6 +76,7 @@ public class User implements UserDetails {
 		// TODO Auto-generated method stub
 		return password_user;
 	}
+	
 	
 	
 
