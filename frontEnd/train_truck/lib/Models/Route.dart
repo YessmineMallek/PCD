@@ -18,8 +18,8 @@ class Route {
   Route.fromJson(Map<String, dynamic> json) {
     routeId = json['route_id'];
     agancy = json['agancy'];
-    routeShortName = json['route_short_name'];
-    routeLongName = json['route_long_name'];
+    routeShortName = json['routeShortName'];
+    routeLongName = json['routeLongName'];
 
     if (json['trips'] != null) {
       trip = <Trip>[];
