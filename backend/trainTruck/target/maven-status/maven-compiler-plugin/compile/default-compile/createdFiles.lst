@@ -15,10 +15,12 @@ com\trainTruck\demo\Model\Stop$StopBuilder.class
 com\trainTruck\demo\Model\User$UserBuilder.class
 com\trainTruck\demo\Config\SecurityConfiguration.class
 com\trainTruck\demo\Model\Route$RouteBuilder.class
+com\trainTruck\demo\Model\Calendar.class
 com\trainTruck\demo\Model\StopTimes.class
 com\trainTruck\demo\Model\Trip.class
 com\trainTruck\demo\Service\TripService.class
 com\trainTruck\demo\Controller\auth\AuthenticationRequest.class
+com\trainTruck\demo\Model\Calendar$CalendarBuilder.class
 com\trainTruck\demo\Controller\RouteController.class
 com\trainTruck\demo\Model\Trip$TripBuilder.class
 com\trainTruck\demo\Controller\auth\AuthenticationController.class

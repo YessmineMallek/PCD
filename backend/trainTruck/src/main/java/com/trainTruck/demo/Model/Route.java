@@ -49,4 +49,6 @@ public class Route {
 	@Column(name ="route_long_name" )
 	private String routeLongName;
 	
+	private String route_desc;
+	private String route_url;
 }

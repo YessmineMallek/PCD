@@ -1,0 +1,10 @@
+FROM eclipse-temurin:17-jdk-alpine
+COPY target/*.jar trainTruck.jar
+COPY ./dbTrain.sql /docker-entrypoint-initdb.d/
+RUN chmod 755 /docker-entrypoint-initdb.d/dbTrain.sql
+
+
+EXPOSE 8080
+EXPOSE 5332
+EXPOSE 5432
+ENTRYPOINT ["java","-jar","trainTruck.jar"]
