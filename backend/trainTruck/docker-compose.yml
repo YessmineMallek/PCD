@@ -2,33 +2,23 @@ version: "3.2"
 services: 
   db:
     image: postgres
-    network_mode: bridge
-    expose:
-      - 5432
-    ports:
-      - 5432:5432
     container_name: db
     environment:
       - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=mallek12
+      - POSTGRES_PASSWORD=123456
       - POSTGRES_DB=GTFS_Base
     volumes: 
-      - C:\postgres_container_data:/var/lib/postgresql/data
+      - ./postgres_container_data:/var/lib/postgresql/data
     restart: always
+    cpus: 1.0
   
   backend:
-    network_mode: bridge
-    build:
-      dockerfile: Dockerfile
+    build: .
     container_name: train_container  
-    expose:
-      - 8080
-    ports:
-      - 8080:8080
     environment:
-      -spring.datasource.url: jdbc:postgresql://192.168.1.65:5432/GTFS_Base
+      -spring.datasource.url: jdbc:postgresql://db:5432/GTFS_Base
       -spring.datasource.username: postgres
-      -spring.datasource.password: mallek12
+      -spring.datasource.password: 123456
     depends_on: 
       - db 
     restart: always
@@ -41,6 +31,3 @@ services:
       PGADMIN_DEFAULT_PASSWORD: root
     ports:
       - "5050:80"
-      
-    
-      

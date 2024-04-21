@@ -33,7 +33,5 @@ public class Calendar {
 	private int sunday;
 	private String start_date; 
 	private String end_date;
-	
-	
 
 }
