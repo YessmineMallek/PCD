@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.trainTruck.demo.TrainTruckApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 8.888 s -- in com.trainTruck.demo.TrainTruckApplicationTests
