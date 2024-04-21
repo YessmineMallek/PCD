@@ -1,8 +1,8 @@
 HELP.md
-
+target/
 !.mvn/wrapper/maven-wrapper.jar
-postgres_container_data
-*.sql
+!**/src/main/**/target/
+!**/src/test/**/target/
 
 ### STS ###
 .apt_generated
@@ -12,7 +12,6 @@ postgres_container_data
 .settings
 .springBeans
 .sts4-cache
-
 
 ### IntelliJ IDEA ###
 .idea
