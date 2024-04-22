@@ -28,7 +28,6 @@ class RouteController extends GetxController{
       }
       isLoading.value=false;
 
-
     }
   }
 

@@ -51,20 +51,12 @@ class ChoicePage extends StatelessWidget {
             IconButton(
               alignment: Alignment.topRight,
                 onPressed: ()async {
-                  if(value!=0)
-                    {
-                      await routeController.findRoutesByAgency(value);
+                      await routeController.findRoutesByAgency(3);
                       Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) =>  BottomPage()),
                       );
-
-                    }else{
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content:  Text("Choisir l'agence"),),
-                    );
-                  }
 
                 },
                 icon: Icon(Icons.skip_next_rounded,size: 40,)),

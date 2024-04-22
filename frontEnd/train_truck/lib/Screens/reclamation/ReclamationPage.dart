@@ -1,11 +1,15 @@
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:train_truck/Controllers/RouteController.dart';
 import 'package:train_truck/Screens/reclamation/emotion_face.dart';
 
 class ReclamationPage extends StatefulWidget {
+
   const ReclamationPage({Key? key}) : super(key: key);
   @override
   State<ReclamationPage> createState() => _ReclamationPageState();
@@ -25,8 +29,12 @@ class _ReclamationPageState extends State<ReclamationPage> {
       }
     });
   }
+
+  RouteController routeController=Get.put(RouteController());
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -74,6 +82,31 @@ class _ReclamationPageState extends State<ReclamationPage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+
+                  DropdownButtonFormField<String>(
+                    value: routeController.routes.isNotEmpty ? routeController.routes.first.name : null,  // Assuming 'name' is a string property of 'route'
+                    items: routeController.routes.map((route) {
+                      return DropdownMenuItem<String>(
+                        value: route,
+                        child: Text(route),
+                      );
+                    }).toList(),
+                    onChanged: (String? newValue) {
+                    },
+                    icon: Icon(
+                      Icons.arrow_drop_down_circle,
+                      color: HexColor('#62A39F'),
+                    ),
+                    dropdownColor: Colors.white,
+                    decoration: InputDecoration(
+                      labelText: "Choose Route",
+                      prefixIcon: Icon(
+                        Icons.route_outlined,
+                        color: HexColor('#62A39F'),
+                      ),
+                    ),
+                  ),
+
 
                   Text(
                     'How do you feel ?',
@@ -245,3 +278,5 @@ class _ReclamationPageState extends State<ReclamationPage> {
 
 
 }
+
+

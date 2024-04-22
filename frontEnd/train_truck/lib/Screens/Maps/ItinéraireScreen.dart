@@ -10,7 +10,6 @@ import 'package:train_truck/Screens/Favoris/Favoris_avec_resultat.dart';
 import 'package:train_truck/Screens/HorsLigne.dart';
 import 'package:train_truck/Screens/Maps/ItineraireCard.dart';
 import 'package:train_truck/Screens/Perturbations.dart';
-
 import 'package:train_truck/Models/Arret.dart';
 
 
