@@ -1,0 +1,33 @@
+version: "3.2"
+services: 
+  db:
+    image: postgres
+    container_name: db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=123456
+      - POSTGRES_DB=GTFS_Base
+    volumes: 
+      - ./postgres_container_data:/var/lib/postgresql/data
+    restart: always
+    cpus: 1.0
+  
+  backend:
+    build: .
+    container_name: train_container  
+    environment:
+      -spring.datasource.url: jdbc:postgresql://db:5432/GTFS_Base
+      -spring.datasource.username: postgres
+      -spring.datasource.password: 123456
+    depends_on: 
+      - db 
+    restart: always
+  pgadmin:
+    container_name: pgadmin4_container
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - "5050:80"

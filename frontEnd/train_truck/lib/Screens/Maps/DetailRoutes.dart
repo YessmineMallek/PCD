@@ -183,7 +183,7 @@ class _DetailRoutesPageState extends State<DetailRoutesPage> {
                       itemCount: routeController.routeDetail.value.trip!.length,
                       itemBuilder: (context, index) {
                         var item=routeController.routeDetail.value.trip![index]!;
-                        return (item.tripHeadsign==destination)? Container(padding: EdgeInsets.symmetric(vertical: 5), child:_buildTripItem(index) ):Container();
+                        return (item.tripHeadsign!.toLowerCase()==destination)? Container(padding: EdgeInsets.symmetric(vertical: 5), child:_buildTripItem(index) ):Container();
                       }
 
               )
