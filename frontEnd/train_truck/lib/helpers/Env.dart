@@ -1,4 +1,3 @@
 class Env {
-
-  String ipAdresse = "https://traintruck.mohamed-amin-mallek.com";
+  String ipAdresse = "http://192.168.1.88:8080";
 }

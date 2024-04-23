@@ -9,6 +9,7 @@ import 'package:train_truck/Screens/Notifications/NotificationPage.dart';
 import 'package:train_truck/Screens/reclamation/ReclamationPage.dart';
 
 class BottomPage extends StatefulWidget {
+
   const BottomPage({super.key});
 
   @override
