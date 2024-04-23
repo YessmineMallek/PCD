@@ -40,7 +40,7 @@ class _EmotionFaceState extends State<EmotionFace> {
         ),
       ),
       child: Padding(
-        padding: EdgeInsets.all(16),
+        padding: EdgeInsets.all(8),
         child: Center(
           child: Text(
             widget.emotionalFace,
