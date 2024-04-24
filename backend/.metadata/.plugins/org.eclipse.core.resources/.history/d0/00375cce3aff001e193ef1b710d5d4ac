@@ -1,0 +1,20 @@
+FROM eclipse-temurin:17-jdk-alpine
+COPY target/*.jar trainTruck.jar
+ENTRYPOINT ["java","-jar","trainTruck.jar"]
+
+
+COPY db.dump /docker-entrypoint-initdb.d/db.dump
+
+# Install PostgreSQL client tools
+RUN apt-get update \
+    && apt-get install -y postgresql-client \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set environment variables (optional)
+ENV POSTGRES_PASSWORD=mysecretpassword
+ENV POSTGRES_DB=mydatabase
+
+# Run the dump file to restore the database
+RUN ["psql", "-U", "postgres", "-d", "mydatabase", "-f", "/docker-entrypoint-initdb.d/dbDump.sql"]
+
+

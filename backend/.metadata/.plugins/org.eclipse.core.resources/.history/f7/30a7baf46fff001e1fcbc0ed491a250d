@@ -1,0 +1,12 @@
+FROM eclipse-temurin:17-jdk-alpine
+COPY target/*.jar trainTruck.jar
+RUN pg_restore -U "postgres" -d "GTFS_Base" /docker-entrypoint-initdb.d/dbTrain.sql
+
+ENTRYPOINT ["java","-jar","trainTruck.jar"]
+
+
+
+
+
+
+

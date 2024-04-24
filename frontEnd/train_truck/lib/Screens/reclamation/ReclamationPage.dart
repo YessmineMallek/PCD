@@ -37,6 +37,7 @@ class _ReclamationPageState extends State<ReclamationPage> {
 
   ReclamationController controller=Get.put(ReclamationController());
   RouteController routeController=Get.put(RouteController());
+  late Size mediaSize;
 
   late Size mediaSize;
 
@@ -97,12 +98,14 @@ class _ReclamationPageState extends State<ReclamationPage> {
                       width:mediaSize.width/1.1,
                       child: DropdownButtonFormField<String>(
                         value: routeController.routes.isNotEmpty ? routeController.routes[0].routeLongName : null,
+
                         items: routeController.routes.map((route) {
                           return DropdownMenuItem<String>(
                             value: route.routeLongName,
                             child: Text(route.routeLongName),
                           );
                         }).toList(),
+
                         onChanged: (String? newValue) {},
                         icon: Icon(
                           Icons.arrow_drop_down_circle,
@@ -123,6 +126,7 @@ class _ReclamationPageState extends State<ReclamationPage> {
 
                       ),
 
+
                     ),
                     SizedBox(
                       height: 25,
@@ -135,6 +139,71 @@ class _ReclamationPageState extends State<ReclamationPage> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
+
+
+                  ],
+                ),
+              ),
+
+
+              SizedBox(
+                height: 25,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Column(
+                    children: [
+                      EmotionFace(
+                        emotionalFace: '😞',
+                      ),
+                  SizedBox(height: 8,),
+                  Text('Bad',
+                  style: TextStyle(
+                    color: Colors.black,
+                  )),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      EmotionFace(
+                        emotionalFace: '🙂',
+                      ),
+                      SizedBox(height: 8,),
+                      Text('Fine',
+                          style: TextStyle(
+                            color: Colors.black,
+                          )),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      EmotionFace(
+                        emotionalFace: '😊',
+                      ),
+                      SizedBox(height: 8,),
+                      Text('Well',
+                          style: TextStyle(
+                            color: Colors.black,
+                          )),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      EmotionFace(
+                        emotionalFace: '😁',
+                      ),
+                      SizedBox(height: 8,),
+                      Text('Excellent',
+                          style: TextStyle(
+                            color: Colors.black,
+                          )),
+                    ],
+                  ),
+
+                    ],
+                  ),
+
 
                   ],
                 ),
@@ -213,6 +282,7 @@ class _ReclamationPageState extends State<ReclamationPage> {
                       side: BorderSide(color: Colors.black.withOpacity(0.4), width: 2), // Ajout de la bordure
                     ),
                   ),
+
                   overlayColor: MaterialStateProperty.all(Colors.transparent), // Suppression de la couleur de superposition
                   shadowColor: MaterialStateProperty.all(Colors.transparent), // Suppression de la couleur de l'ombre
                 ),
@@ -252,6 +322,7 @@ class _ReclamationPageState extends State<ReclamationPage> {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(res.toString())));
                   }
                 },
+
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
@@ -317,6 +388,7 @@ class _ReclamationPageState extends State<ReclamationPage> {
           border: InputBorder.none,
         ),
       )
+
   );
 
 

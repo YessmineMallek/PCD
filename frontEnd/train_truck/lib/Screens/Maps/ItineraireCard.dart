@@ -13,10 +13,10 @@ class ItineraireCard extends StatelessWidget {
   final  itemIndex;
   final  route;
    RouteController routeController=Get.put(RouteController());
-
    @override
   Widget build(BuildContext context) {
-    return InkWell(
+
+     return InkWell(
       onTap: (){
         routeController.routeDetail.value=route;
         print(route);
