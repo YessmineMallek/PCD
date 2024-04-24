@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:train_truck/Controllers/UserController.dart';
+import 'package:train_truck/Screens/Login_Registration/ChoicePage.dart';
 import 'package:train_truck/Screens/Login_Registration/UserUpdatePage.dart';
 import 'package:train_truck/Screens/Maps/Itin%C3%A9raireScreen.dart';
 import 'package:train_truck/Screens/Notifications/NotificationPage.dart';
+import 'package:train_truck/Screens/Search/SearchPage.dart';
 import 'package:train_truck/Screens/reclamation/ReclamationPage.dart';
 
 class BottomPage extends StatefulWidget {
@@ -32,7 +34,7 @@ class _BottomPageState extends State<BottomPage> {
       userController.findUser();
     pages = <Widget>[
       ItineraireScreen(),
-      ReclamationPage(),
+      SearchPage(),
       ReclamationPage(),
       UserUpdatePage()
 
