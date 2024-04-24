@@ -5,8 +5,12 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:train_truck/Controllers/ReclamationController.dart';
 import 'package:train_truck/Controllers/RouteController.dart';
+import 'package:train_truck/Models/Reclamation.dart';
 import 'package:train_truck/Screens/reclamation/emotion_face.dart';
+
+import '../Login_Registration/ChoicePage.dart';
 
 class ReclamationPage extends StatefulWidget {
 
@@ -23,6 +27,7 @@ class _ReclamationPageState extends State<ReclamationPage> {
     final XFile? image = await _imagePicker.pickImage(source: ImageSource.camera);
     setState(() {
       if (image != null) {
+        print(image.path);
         _image = File(image.path);
       } else {
         print('No image selected.');
@@ -30,7 +35,10 @@ class _ReclamationPageState extends State<ReclamationPage> {
     });
   }
 
+  ReclamationController controller=Get.put(ReclamationController());
   RouteController routeController=Get.put(RouteController());
+  late Size mediaSize;
+
   late Size mediaSize;
 
   @override
@@ -87,42 +95,51 @@ class _ReclamationPageState extends State<ReclamationPage> {
                   children: [
 
                     SizedBox(
-                      width:mediaSize.width/1.2,
+                      width:mediaSize.width/1.1,
                       child: DropdownButtonFormField<String>(
-                        value: routeController.routes.isNotEmpty ? routeController.routes[0].routeLongName:null,  // Assuming 'name' is a string property of 'route'
+                        value: routeController.routes.isNotEmpty ? routeController.routes[0].routeLongName : null,
+
                         items: routeController.routes.map((route) {
                           return DropdownMenuItem<String>(
                             value: route.routeLongName,
                             child: Text(route.routeLongName),
                           );
                         }).toList(),
-                        onChanged: (String? newValue) {
-                        },
 
+                        onChanged: (String? newValue) {},
                         icon: Icon(
                           Icons.arrow_drop_down_circle,
-                          color: HexColor('#62A39F'),
+                          color: Color(0xFF62A39F),
                         ),
                         dropdownColor: Colors.white,
                         decoration: InputDecoration(
-                          labelText: "Choose Route",
+                          labelText: "Choisir un itinéraire",
                           prefixIcon: Icon(
                             Icons.route_outlined,
-                            color: HexColor('#62A39F'),
+                            color: Color(0xFF62A39F),
+                          ),
+                          hintStyle: TextStyle(color: Colors.white10),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white10),
                           ),
                         ),
+
                       ),
+
+
                     ),
-
-
+                    SizedBox(
+                      height: 25,
+                    ),
                     Text(
-                      'How do you feel ?',
+                      'Comment te sens-tu ?',
                       style: TextStyle(
-                        color: Colors.black87,
+                        color: Colors.blueGrey,
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
+
 
                   ],
                 ),
@@ -188,6 +205,70 @@ class _ReclamationPageState extends State<ReclamationPage> {
                   ),
 
 
+                  ],
+                ),
+              ),
+
+
+              SizedBox(
+                height: 25,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Column(
+                    children: [
+                      EmotionFace(
+                        emotionalFace: '😞',
+                      ),
+                      SizedBox(height: 8,),
+                      Text('Mauvais',
+                          style: TextStyle(
+                            color: Colors.black,
+                          )),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      EmotionFace(
+                        emotionalFace: '🙂',
+                      ),
+                      SizedBox(height: 8,),
+                      Text('Bien',
+                          style: TextStyle(
+                            color: Colors.black,
+                          )),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      EmotionFace(
+                        emotionalFace: '😊',
+                      ),
+                      SizedBox(height: 8,),
+                      Text('Très bien',
+                          style: TextStyle(
+                            color: Colors.black,
+                          )),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      EmotionFace(
+                        emotionalFace: '😁',
+                      ),
+                      SizedBox(height: 8,),
+                      Text('Excellent',
+                          style: TextStyle(
+                            color: Colors.black,
+                          )),
+                    ],
+                  ),
+
+                ],
+              ),
+
+
               SizedBox(height: 30.0),
               buildBasicCard(),
               SizedBox(height: 30),
@@ -201,6 +282,7 @@ class _ReclamationPageState extends State<ReclamationPage> {
                       side: BorderSide(color: Colors.black.withOpacity(0.4), width: 2), // Ajout de la bordure
                     ),
                   ),
+
                   overlayColor: MaterialStateProperty.all(Colors.transparent), // Suppression de la couleur de superposition
                   shadowColor: MaterialStateProperty.all(Colors.transparent), // Suppression de la couleur de l'ombre
                 ),
@@ -221,7 +303,26 @@ class _ReclamationPageState extends State<ReclamationPage> {
               ),
               SizedBox(height: 40,),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () async {
+                  var res = await controller.createReclamation();
+                  if (res == "Success") {
+                    var reclamation = Reclamation();
+                    controller.addReclamation(reclamation);
+
+                    var response = await ReclamationController.registration(controller.toJsonString());
+                    if (response == "Success") {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => ChoicePage()),
+                      );
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(response.toString())));
+                    }
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(res.toString())));
+                  }
+                },
+
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
@@ -241,51 +342,54 @@ class _ReclamationPageState extends State<ReclamationPage> {
                 ),
               ),
 
-                ],
 
-              ),
+            ],
+
+          ),
         ),
 
-        ),
-      );
+      ),
+    );
 
   }
 
   Widget buildBasicCard() => Container(
-    padding: EdgeInsets.all(16),
-    margin: EdgeInsets.all(10),
-    decoration: BoxDecoration(
-      color: Colors.white10.withOpacity(0.5),
-      borderRadius: BorderRadius.circular(10.0),
-      border: Border.all( // Added border
-        color: Colors.black.withOpacity(0.4),
-        width: 2,
-      ),
-      boxShadow: [
-        BoxShadow(
+      padding: EdgeInsets.all(16),
+      margin: EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        color: Colors.white10.withOpacity(0.5),
+        borderRadius: BorderRadius.circular(10.0),
+        border: Border.all( // Added border
           color: Colors.black.withOpacity(0.4),
-          spreadRadius: 5,
-          blurRadius: 7,
-          offset: Offset(0, 3), // changes position of shadow
+          width: 2,
         ),
-      ],
-    ),
-    child:TextFormField(
-      minLines: 5,
-      maxLines: 50,
-      keyboardType: TextInputType.multiline,
-      style: TextStyle(color: Colors.white),
-      decoration: InputDecoration(
-        filled: true,
-        fillColor: Colors.transparent,
-        hintText: 'Write your description ...',
-        hintStyle: TextStyle(color: Colors.black54.withOpacity(0.6)),
-        border: InputBorder.none,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.4),
+            spreadRadius: 5,
+            blurRadius: 7,
+            offset: Offset(0, 3), // changes position of shadow
+          ),
+        ],
       ),
-    )
+      child:TextFormField(
+        onChanged: (val){
+          controller.reclamation.value.description=val;
+        },
+        minLines: 5,
+        maxLines: 50,
+        keyboardType: TextInputType.multiline,
+        style: TextStyle(color: Colors.black),
+        decoration: InputDecoration(
+          filled: true,
+          fillColor: Colors.transparent,
+          hintText: 'Ecrire votre description ...',
+          hintStyle: TextStyle(color: Colors.black54.withOpacity(0.6)),
+          border: InputBorder.none,
+        ),
+      )
+
   );
 
 
 }
-
-
