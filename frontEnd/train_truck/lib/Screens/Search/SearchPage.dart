@@ -20,8 +20,9 @@ class _SearchPageState extends State<SearchPage> {
   TextEditingController _destinationTEC = TextEditingController();
   TextEditingController _originTEC = TextEditingController();
   var routeController=Get.put(RouteController());
+
   var myColor;
-  var origin;
+  var origine;
   var destination;
   late Size mediaSize;
   bool rememberUser = false;
@@ -31,14 +32,7 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   void initState() {
-    routeController.findRoutesByAgency(3);
-    print(routeController.searchDetail.value.trip);
-    List<String> chainesSeparees = routeController.searchDetail.value.routeLongName!.split("-");
-    if (chainesSeparees.length >= 2) {
-      origin = chainesSeparees[0];
-      destination = chainesSeparees[1];
-    }
-
+    print(routeController.routesCustom.value.trip);
 
   }
   @override
@@ -82,7 +76,7 @@ class _SearchPageState extends State<SearchPage> {
     );
   }
   Widget _buildBottom() {
-    return Container(
+    return SizedBox(
       width: mediaSize.width,
       height: mediaSize.height/1.5,
       child: Card(
@@ -173,7 +167,7 @@ class _SearchPageState extends State<SearchPage> {
                             children: [
                               SizedBox(
                                   height: 1,
-                                  width: mediaSize.width / 1.8,
+                                  width: mediaSize.width / 2.4,
                                   child: Container(color: grey)),
                             ],
                           ),
@@ -210,8 +204,14 @@ class _SearchPageState extends State<SearchPage> {
 
                         ],
                       ),
+                      IconButton(onPressed: ()async{
+                        var origine = _originTEC.text;
+                        var destination = _destinationTEC.text;
+                        await routeController.findRoutesByDepArr(origine,destination);
+                      }, icon: Icon(Icons.search))
                     ],
                   ),
+
                 ],
 
               ),
@@ -219,83 +219,63 @@ class _SearchPageState extends State<SearchPage> {
             ),
           ),
         ),
-        ElevatedButton(
-          onPressed: (){
-            var origin = _originTEC.text;
-            var destination = _destinationTEC.text;
-            print(origin);
-            print(destination);
-          },
-          style: ButtonStyle(
-            shape: MaterialStateProperty.all<
-                RoundedRectangleBorder>(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-              ),
-            ),
-            minimumSize:
-            MaterialStateProperty.all(Size(50, 50)),
-            backgroundColor:
-            MaterialStateProperty.all(Theme.of(context).primaryColor),
-          ),
-          child:Text(
-            "Chercher",
-            style: TextStyle(
-                fontSize: 18,
-                color: Colors.white,
-                fontWeight: FontWeight.normal),
-          ),
-        ),
+
 
 
 
         SizedBox(height: 10),
-        Column(
+       routeController.isLoading.value!= false? Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Les voyages disponibles",style:GoogleFonts.alata(color:myColor, fontWeight:FontWeight.w600, fontSize:18),
+            Text("Les voyages disponibles :",style:GoogleFonts.alata(color:myColor, fontWeight:FontWeight.w600, fontSize:18),
             ),
             SingleChildScrollView(
-              child: Container(
+              child:Obx(()=>Container(
                 height: mediaSize.height/4,
                 child: ListView.builder(
-                  itemCount: routeController.searchDetail.value.trip!.length,
-                  itemBuilder: (context, index){
-                    var item=routeController.searchDetail.value.trip![index]!;
-                    return (item.tripHeadsign==destination)? Container(padding: EdgeInsets.symmetric(vertical: 5), child:_buildTripItem(index) ):Container();
-                  }
-                ),
-              ),
-            ),
+                itemCount: routeController.routesCustom.value.trip!.length,
+                itemBuilder: (context, index) {
+                var item=routeController.routesCustom.value.trip![index];
+                  return (item.tripHeadsign==destination)? Container(padding: EdgeInsets.symmetric(vertical: 5), child:_buildTripItem(index) ):Container();
+                }
+
+                )
+
+                )))
 
 
-          ],
-        )
+            ],
+        ):Container(),
       ],
     );
   }
-  Widget _buildTripItem(index){
+
+  Widget _buildTripItem(index)
+  {
     return
-        SizedBox(
-          width: 10,
-          child: Column(
-            children: [
-              Column(
-                crossAxisAlignment :CrossAxisAlignment.start,
-              children :[
+      SizedBox(
+        width: 10,
+        child: Column(
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children:[
                 buildItem(index),
                 Padding(
-                    padding: const EdgeInsets.only(top: 10),
+                  padding: const EdgeInsets.only(top: 10),
                   child: SizedBox(
                     height: 1,width: mediaSize.width,child: Container(color: myColor,),
-                ),
+                  ),
                 )
-              ],
-              ),
-            ],
-          ),
-        );
+              ],),
+
+          ],
+        ),
+      );
+
+
   }
+
   Widget buildItem(index)
   {
     return Stack(
@@ -307,34 +287,33 @@ class _SearchPageState extends State<SearchPage> {
                   children: [
                     Icon(Icons.calendar_month,color:Colors.lightBlue),
                     SizedBox(width: 10.0),
-                    Text(routeController.routeDetail.value.trip![index].weekDay!)
+                    Text(routeController.routesCustom.value.trip![index].weekDay!)
                   ]),
               SizedBox(height: 10,),
               Row(
                   children: [
                     Icon(FontAwesomeIcons.locationDot,color: Colors.lightBlue,),
                     SizedBox(width: 10.0),
-                    Text(routeController.routeDetail.value.trip![index].tripHeadsign!)
+                    Text(routeController.routesCustom.value.trip![index].tripHeadsign!)
                   ])]),
-        Positioned(
-            right: 0,
-            child: ElevatedButton(
-              onPressed: (){
-                showDialog(
-                    context: Get.context!,
-                    builder: (BuildContext context) {
-                      return CustomDialogPage(listStopsTime:routeController.routeDetail.value.trip![index].stopsTime );
-                    });
-
-              }, child: Text("Details",style: TextStyle(color: Colors.lightBlue),),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: HexColor('#deeceb'),
-              ),))
+        // Positioned(
+        //     right: 0,
+        //     child: ElevatedButton(
+        //       onPressed: (){
+        //         showDialog(
+        //             context: Get.context!,
+        //             builder: (BuildContext context) {
+        //               return CustomDialogPage(listStopsTime:routeController.routesCustom.value.trip![index].stopsTime );
+        //             });
+        //
+        //       }, child: Text("Details",style: TextStyle(color: Colors.lightBlue),),
+        //       style: ElevatedButton.styleFrom(
+        //         backgroundColor: HexColor('#deeceb'),
+        //       ),))
       ],
     );
 
   }
-
 
 }
 

@@ -10,9 +10,12 @@ class RouteController extends GetxController{
   RxList routes=[].obs;
   var isLoading=false.obs;
   var routeDetail=Route().obs;
-  var searchDetail=Route().obs;
 
-  findRoutesByAgency(int id)async
+
+  var routesCustom=Route().obs;
+
+
+  findRoutesByAgency(id)async
   {
     isLoading.value=true;
 
@@ -28,7 +31,23 @@ class RouteController extends GetxController{
       }
       isLoading.value=false;
 
+    }
+  }
 
+
+  findRoutesByDepArr(origine,destination)async
+  {
+    isLoading.value=false;
+
+    final token = await UserService.getToken();
+    routesCustom=Route().obs;
+    var response=await routeService.getRoutesByDestArr(token,origine,destination );
+    print("------------------------------------");
+    if (response.statusCode == 200) {
+      isLoading.value=true;
+      print(response.body);
+      var listRoutes = jsonDecode(response.body);
+      routesCustom.value=Route.fromJson(listRoutes) ;
     }
   }
 

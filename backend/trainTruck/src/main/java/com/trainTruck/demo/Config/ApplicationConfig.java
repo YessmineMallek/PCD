@@ -1,6 +1,5 @@
 package com.trainTruck.demo.Config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,8 +20,7 @@ import lombok.RequiredArgsConstructor;
 @Configuration
 @RequiredArgsConstructor
 public class ApplicationConfig {
-	@Autowired
-	private  UserRepository userRepo;
+	private final UserRepository userRepo;
 	
 	@Bean
 	public UserDetailsService userDetailsService()

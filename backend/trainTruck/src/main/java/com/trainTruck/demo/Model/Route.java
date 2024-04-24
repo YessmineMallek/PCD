@@ -2,6 +2,8 @@ package com.trainTruck.demo.Model;
 
 import java.util.List;
 
+import org.hibernate.annotations.ColumnTransformer;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.CascadeType;
@@ -18,9 +20,12 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Setter
+@Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -37,7 +42,13 @@ public class Route {
 	@OneToMany(mappedBy = "route_id")
 	private List<Trip> trips;
 	
-	private String route_short_name;
-	private String route_long_name;
-
+	@Column(name="route_short_name")
+	private String routeShortName;
+	
+	
+	@Column(name ="route_long_name" )
+	private String routeLongName;
+	
+	private String route_desc;
+	private String route_url;
 }
