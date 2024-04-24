@@ -33,7 +33,6 @@ class UserController extends GetxController{
     loginFormKey = GlobalKey<FormState>();
   }
 
-
   Future registration()async
   {
 

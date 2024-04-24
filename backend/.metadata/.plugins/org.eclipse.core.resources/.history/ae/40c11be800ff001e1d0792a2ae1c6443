@@ -1,0 +1,10 @@
+FROM eclipse-temurin:17-jdk-alpine
+COPY target/*.jar trainTruck.jar
+
+
+ADD dbTrain.sql /docker-entrypoint-initdb.d/
+
+
+
+ENTRYPOINT ["java","-jar","trainTruck.jar","docker-entrypoint.sh"]
+CMD ["postgres"]

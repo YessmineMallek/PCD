@@ -34,7 +34,6 @@ public class RouteService {
 
 			route=routeRepo.findByRouteLongName(longName);		
 		}
-		System.out.println();
 		return route;
 		
 	}

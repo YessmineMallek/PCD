@@ -12,13 +12,13 @@ class StopController extends GetxController {
 
 
   findAllStops() async {
-
+    stops=[].obs;
     final token = await UserService.getToken();
 
     var response = await stopService.getStops(token);
     if (response.statusCode == 200) {
       var listStops = jsonDecode(response.body);
-      print(listStops.runtimeType);
+      print("--------------"+listStops.length.toString());
       for (var stop in listStops) {
         stops.add(Stop.fromJson(stop));
       }
