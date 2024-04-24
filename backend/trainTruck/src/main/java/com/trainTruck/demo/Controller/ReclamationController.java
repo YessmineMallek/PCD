@@ -11,15 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping(path="/reclamation")
+@RequestMapping(path="/api/v1/reclamation")
 public class ReclamationController {
     @Autowired
     private ReclamationRepo reclamationRepo;
 
-    @PostMapping("/add")
-    public Reclamation addReclamation(@Validated @RequestBody Reclamation reclamation) {
-        return reclamationRepo.save(reclamation);
-    }
+
 
 
 
