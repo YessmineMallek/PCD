@@ -24,4 +24,25 @@ class RouteService
     }
 
 
+    
+    getRoutesByDestArr(jwt,dest,arrive)async
+    {
+      String baseUrl = "${Env().ipAdresse}/api/v1/routes/${dest}/${arrive}";
+      try
+      {
+        final res = await http.get(
+          Uri.parse(baseUrl),
+          headers: <String, String>{
+            'Authorization': 'Bearer ' + jwt,
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+        );
+        print(res);
+        return res;
+      } catch (e) {
+        print("RouteService: error getting agency $e");
+      }
+
+    }
+
 }
