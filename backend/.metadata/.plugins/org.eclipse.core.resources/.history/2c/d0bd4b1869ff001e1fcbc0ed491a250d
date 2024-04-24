@@ -1,3 +1,0 @@
-FROM postgres
-
-ADD ./devops/db/dummy_dump.sql /docker-entrypoint-initdb.d
