@@ -135,7 +135,7 @@ class _DetailRoutesPageState extends State<DetailRoutesPage> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("A partir de: ",style:  TextStyle(color:grey,fontSize: 15,fontWeight: FontWeight.w500,),),
+                        Text("Depart: ",style:  TextStyle(color:grey,fontSize: 15,fontWeight: FontWeight.w500,),),
                         Text("$origine"),
                        Row(
                             children: [
@@ -159,7 +159,7 @@ class _DetailRoutesPageState extends State<DetailRoutesPage> {
                             ],
                           ),
 
-                        Text("Jusqu'à:",style:  TextStyle(color: grey,fontSize: 15,fontWeight: FontWeight.w500),),
+                        Text("Arrivée:",style:  TextStyle(color: grey,fontSize: 15,fontWeight: FontWeight.w500),),
                         Text("$destination"),],
                     )
                     
@@ -183,7 +183,7 @@ class _DetailRoutesPageState extends State<DetailRoutesPage> {
                       itemCount: routeController.routeDetail.value.trip!.length,
                       itemBuilder: (context, index) {
                         var item=routeController.routeDetail.value.trip![index]!;
-                        return (item.tripHeadsign==destination)? Container(padding: EdgeInsets.symmetric(vertical: 5), child:_buildTripItem(index) ):Container();
+                        return (item.tripHeadsign!.toLowerCase()==destination)? Container(padding: EdgeInsets.symmetric(vertical: 5), child:_buildTripItem(index) ):Container();
                       }
 
               )
@@ -262,3 +262,34 @@ class _DetailRoutesPageState extends State<DetailRoutesPage> {
     }
 
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                         // Text(
+                         // "A partir de: ",
+                         // style: TextStyle(
+                          //  color: grey,
+                          //  fontSize: 15,
+                          //  fontWeight: FontWeight.w500,
+                        //  ),
+                       // ),
+
+                        //  validator: (val) {
+                         //   if (val == null || val.isEmpty) {
+                          //    return "Veuillez saisir votre départ";
+                          //  }
+                         //   return null;
+                        //  },
+                      // ),
