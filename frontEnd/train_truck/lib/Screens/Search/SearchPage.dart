@@ -78,7 +78,7 @@ class _SearchPageState extends State<SearchPage> {
   Widget _buildBottom() {
     return SizedBox(
       width: mediaSize.width,
-      height: mediaSize.height/1.5,
+      height: mediaSize.height/1.7,
       child: Card(
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
@@ -224,28 +224,27 @@ class _SearchPageState extends State<SearchPage> {
 
 
         SizedBox(height: 10),
-       routeController.isLoading.value!= false? Column(
+     Obx(()=>  routeController.isLoading.value == true ? Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text("Les voyages disponibles :",style:GoogleFonts.alata(color:myColor, fontWeight:FontWeight.w600, fontSize:18),
             ),
             SingleChildScrollView(
-              child:Obx(()=>Container(
-                height: mediaSize.height/4,
+              child:Container(
+                height: mediaSize.height/6,
                 child: ListView.builder(
-                itemCount: routeController.routesCustom.value.trip!.length,
+                itemCount: (routeController.routesCustom.value.trip!=null)?routeController.routesCustom.value.trip!.length:0,
                 itemBuilder: (context, index) {
-                var item=routeController.routesCustom.value.trip![index];
-                  return (item.tripHeadsign==destination)? Container(padding: EdgeInsets.symmetric(vertical: 5), child:_buildTripItem(index) ):Container();
+                  return Container(padding: EdgeInsets.symmetric(vertical: 5), child:_buildTripItem(index) );
                 }
 
                 )
 
-                )))
+                ))
 
 
             ],
-        ):Container(),
+     ):Container()),
       ],
     );
   }
@@ -296,20 +295,20 @@ class _SearchPageState extends State<SearchPage> {
                     SizedBox(width: 10.0),
                     Text(routeController.routesCustom.value.trip![index].tripHeadsign!)
                   ])]),
-        // Positioned(
-        //     right: 0,
-        //     child: ElevatedButton(
-        //       onPressed: (){
-        //         showDialog(
-        //             context: Get.context!,
-        //             builder: (BuildContext context) {
-        //               return CustomDialogPage(listStopsTime:routeController.routesCustom.value.trip![index].stopsTime );
-        //             });
-        //
-        //       }, child: Text("Details",style: TextStyle(color: Colors.lightBlue),),
-        //       style: ElevatedButton.styleFrom(
-        //         backgroundColor: HexColor('#deeceb'),
-        //       ),))
+        Positioned(
+             right: 0,
+             child: ElevatedButton(
+               onPressed: (){
+                 showDialog(
+                     context: Get.context!,
+                    builder: (BuildContext context) {
+                    return CustomDialogPage(listStopsTime:routeController.routesCustom.value.trip![index].stopsTime );
+                     });
+
+               }, child: Text("Details",style: TextStyle(color: Colors.lightBlue),),
+              style: ElevatedButton.styleFrom(
+                 backgroundColor: HexColor('#deeceb'),
+               ),))
       ],
     );
 

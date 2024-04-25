@@ -50,7 +50,7 @@ class CustomDialogPage extends StatelessWidget {
   {
     return Row(children: [
       Icon(FontAwesomeIcons.locationDot,size: 15,color: Colors.lightBlue),
-      Text(listStopsTime[index].stopId.stopName),
+      listStopsTime[index].stopId!=null? Text(listStopsTime[index].stopId.stopName):Container(),
 
 
     ],);

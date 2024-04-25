@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       title: 'Train Truck',
-      home: BottomPage(),
+      home: SplashScreen(),
     );
   }
 }
