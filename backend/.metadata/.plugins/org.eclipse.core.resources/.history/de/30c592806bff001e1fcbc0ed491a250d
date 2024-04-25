@@ -1,3 +1,0 @@
-FROM postgres
-
-ADD db.dump /docker-entrypoint-initdb.d

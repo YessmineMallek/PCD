@@ -1,3 +1,0 @@
-FROM postgres
-
-ADD dbTrain.sql /docker-entrypoint-initdb.d
