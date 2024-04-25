@@ -29,7 +29,6 @@ public class Reclamation {
 
     private String emotion;
     private String description;
-
-    private MultipartFile image;
+    private String image;
 
 }
