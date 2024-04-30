@@ -25,31 +25,5 @@ class ReclamationService {
       return null;
     }
   }
-  addReclamation(Reclamation data,jwt,File image,atributeName)async
-  {
-
-    http.MultipartRequest request = new http.MultipartRequest('POST', Uri.parse(baseUrl));
-
-    request.fields["user"] = data.phoneNumber!.phoneNumber!;
-    request.fields["route"] = data.route!.routeLongName!;
-    request.fields["emotion"] = data.emotion!;
-    request.fields["description"] = data.description!;
-    jsonEncode(request.fields["data"]);
-
-    request.headers['Content-Type'] = 'multipart/form-data';
-    if (jwt != "") {
-      request.headers['Authorization'] = "Bearer ${jwt.toString()} ";
-    }
-    var multipartFile = await http.MultipartFile.fromPath(
-        "file" + atributeName, image.path);
-
-
-    request.files.add(multipartFile);
-
-    http.StreamedResponse streamedResponse = await request.send();
-    var response = await http.Response.fromStream(streamedResponse);
-    print(response.statusCode);
-    return response;
-
-  }
+  
 }
