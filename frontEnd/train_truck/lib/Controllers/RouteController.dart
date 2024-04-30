@@ -43,7 +43,7 @@ class RouteController extends GetxController{
     var response=await routeService.getRoutesByDestArr(token,origine,destination );
     print(response.statusCode);
     if (response.statusCode == 200) {
-      print(response.body);
+      print("--------------${response.body}");
       var listRoutes = jsonDecode(response.body);
       routesCustom.value=Route.fromJson(listRoutes) ;
       isLoading.value=true;

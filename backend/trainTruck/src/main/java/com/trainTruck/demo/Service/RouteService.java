@@ -24,17 +24,20 @@ public class RouteService {
 	}
 	
 	public Route findRouteByLongName(String destination,String origine) {
-		String longName=destination.toLowerCase().concat("-".concat(origine.toLowerCase()));
-		Route route= routeRepo.findByRouteLongName(longName);
-		
-		if(route==null)
-		{
-			longName=origine.toLowerCase().concat("-".concat(destination.toLowerCase()));
+		String longName=destination.trim().toLowerCase().concat("-".concat(origine.trim().toLowerCase()));
+		String longName2=origine.trim().toLowerCase().concat("-".concat(destination.trim().toLowerCase()));
 			System.out.println(longName);
-
-			route=routeRepo.findByRouteLongName(longName);		
+		List<Route> routes= routeRepo.findAll();
+		
+		for(Route ele :routes)
+		{
+			if(ele.getRouteLongName().equals(longName.toLowerCase()) || ele.getRouteLongName().equals(longName2.toLowerCase()))
+			{
+				return ele;
+			}
 		}
-		return route;
+		
+		return null;
 		
 	}
 }

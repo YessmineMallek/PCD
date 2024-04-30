@@ -37,7 +37,7 @@ class _SearchPageState extends State<SearchPage> {
   }
   @override
   Widget build(BuildContext context) {
-
+    routeController.isLoading.value=false;
 
     mediaSize = MediaQuery.of(context).size;
     myColor=Theme.of(context).primaryColor;
@@ -121,7 +121,7 @@ class _SearchPageState extends State<SearchPage> {
                         children: [
                           Icon(FontAwesomeIcons.locationDot, color: secondBlue),
                           Padding(
-                            padding: EdgeInsets.symmetric(vertical: 10),
+                            padding: EdgeInsets.symmetric(vertical: 5),
                             child: SizedBox(
                               height: 40,
                               width: 1,
@@ -163,6 +163,8 @@ class _SearchPageState extends State<SearchPage> {
                                 }
                             ),
                           ),
+                          SizedBox(height: 10,),
+
                           Row(
                             children: [
                               SizedBox(
@@ -171,6 +173,7 @@ class _SearchPageState extends State<SearchPage> {
                                   child: Container(color: grey)),
                             ],
                           ),
+                          SizedBox(height: 15,),
                           Text(
                             "Jusqu'à:",
                             style: TextStyle(

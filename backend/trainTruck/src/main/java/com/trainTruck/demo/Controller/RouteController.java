@@ -2,7 +2,9 @@ package com.trainTruck.demo.Controller;
 
 import java.util.List;
 
+import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,11 +36,13 @@ public class RouteController {
 		return routeService.findRoute(id);
 	}
 	@GetMapping("/{destination}/{origine}")
-	public Route getRouteByDestinationOrigine(@PathVariable(value="destination") String destination,@PathVariable(value="origine") String origine)
+	public ResponseEntity<Route> getRouteByDestinationOrigine(@PathVariable(value="destination") String destination,@PathVariable(value="origine") String origine)
 	{
-		
 		Route  route= routeService.findRouteByLongName(destination,origine);
-		System.out.println(route);
-		return route;
+		if(route!= null)
+			return ResponseEntity.ok(route);
+		else 
+			return ResponseEntity.notFound().build();
+		
 	}
 }
