@@ -4,7 +4,7 @@ import 'package:train_truck/Controllers/RouteController.dart';
 import 'package:train_truck/Screens/DetailsScreen.dart';
 import 'package:train_truck/Screens/Maps/DetailRoutes.dart';
 class ItineraireCard extends StatelessWidget {
-   ItineraireCard({
+  ItineraireCard({
     Key? key,
     required this.itemIndex,
     required this.route,
@@ -12,16 +12,16 @@ class ItineraireCard extends StatelessWidget {
 
   final  itemIndex;
   final  route;
-   RouteController routeController=Get.put(RouteController());
-   @override
+  RouteController routeController=Get.put(RouteController());
+  @override
   Widget build(BuildContext context) {
 
-     return InkWell(
+    return InkWell(
       onTap: (){
         routeController.routeDetail.value=route;
         print(route);
         Get.to(
-          DetailRoutesPage()
+            DetailRoutesPage()
         );
       },
       child: Container(

@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:get/get.dart';
 import 'package:train_truck/Models/Route.dart';
 import 'package:train_truck/Models/User.dart';
 
@@ -8,7 +9,7 @@ class Reclamation {
   Route? route;
   String? emotion;
   String? description;
-  ByteBuffer? image;
+  MultipartFile? image;
 
 
   Reclamation({this.phoneNumber,this.route, this.emotion, this.description, this.image});

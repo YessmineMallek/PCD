@@ -12,6 +12,14 @@ class ReclamationController extends GetxController {
 
   final List<Reclamation> reclamations = <Reclamation>[].obs;
 
+  void addReclamation(Reclamation reclamation) {
+    reclamations.add(reclamation);
+  }
+
+  static Future<String> registration(String jsonData) async {
+    await Future.delayed(Duration(seconds: 2));
+    return "Success";
+  }
 
   Future createReclamation()async
   {
@@ -33,14 +41,7 @@ class ReclamationController extends GetxController {
   }
 
 
-  void addReclamation(Reclamation reclamation) {
-    reclamations.add(reclamation);
-  }
 
-  static Future<String> registration(String jsonData) async {
-    await Future.delayed(Duration(seconds: 2));
-    return "Success";
-  }
 
 
 
