@@ -51,4 +51,13 @@ public class Route {
 	
 	private String route_desc;
 	private String route_url;
+	public String getRouteLongName()
+	{
+		return routeLongName.toLowerCase();
+	}
+	
+	
+	
+	
+	
 }
