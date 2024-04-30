@@ -25,6 +25,28 @@ class ChoicePage extends StatelessWidget {
           children: [
             HeaderWidget(),
             SizedBox(height:100),
+          Text(
+            'Choisir votre agence ',
+            maxLines: 3,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+                color: Colors.grey[800],
+                fontWeight: FontWeight.w900,
+                fontFamily: 'Open Sans',
+                fontSize: 30),
+          ),
+            SizedBox(height:10),
+
+            Text(
+              'Choisissez l\'agence qui vous représente',
+              style: TextStyle(
+                color: Colors.grey[400],
+                fontWeight: FontWeight.w900,
+                fontFamily: 'Open Sans',
+                fontSize: 10,
+              ),
+            ),
+            SizedBox(height:40),
 
             InkWell(
               onTap: ()=>{value=3},
@@ -46,20 +68,34 @@ class ChoicePage extends StatelessWidget {
                 text: "Sahel",
               ),
             ),
-            SizedBox(height:30),
+            SizedBox(height:50),
 
-            IconButton(
-              alignment: Alignment.topRight,
-                onPressed: ()async {
-                      await routeController.findRoutesByAgency(3);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>  BottomPage()),
-                      );
-
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.grey[400],
+                border: Border.all(color: Colors.grey),
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+              child: TextButton.icon(
+                onPressed: () async {
+                  await routeController.findRoutesByAgency(3);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => BottomPage()),
+                  );
                 },
-                icon: Icon(Icons.skip_next_rounded,size: 40,)),
+                icon: Icon(Icons.skip_next_rounded, color: Colors.black), // Remplacer l'icône par la vôtre si nécessaire
+                label: Text(
+                  'Suivant',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+
           ],
         ),
 

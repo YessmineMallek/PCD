@@ -8,8 +8,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:train_truck/Controllers/ReclamationController.dart';
 import 'package:train_truck/Controllers/RouteController.dart';
 import 'package:train_truck/Models/Reclamation.dart';
-import 'package:train_truck/Screens/Login_Registration/ChoicePage.dart';
 import 'package:train_truck/Screens/reclamation/emotion_face.dart';
+import '../Login_Registration/ChoicePage.dart';
 
 
 class ReclamationPage extends StatefulWidget {
@@ -37,10 +37,11 @@ class _ReclamationPageState extends State<ReclamationPage> {
 
   ReclamationController controller=Get.put(ReclamationController());
   RouteController routeController=Get.put(RouteController());
-
   late Size mediaSize;
 
   @override
+
+
   Widget build(BuildContext context) {
     mediaSize = MediaQuery.of(context).size;
 
@@ -89,42 +90,44 @@ class _ReclamationPageState extends State<ReclamationPage> {
               ),
               SizedBox(height: 30.0),
               Container(
+
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
+
                   children: [
 
-                    SizedBox(
-                      width:mediaSize.width/1.1,
-                      child: DropdownButtonFormField<String>(
-                        value: routeController.routes.isNotEmpty ? routeController.routes[0].routeLongName : null,
-                        items: routeController.routes.map((route) {
-                          return DropdownMenuItem<String>(
-                            value: route.routeLongName,
-                            child: Text(route.routeLongName),
-                          );
-                        }).toList(),
-                        onChanged: (String? newValue) {},
-                        icon: Icon(
-                          Icons.arrow_drop_down_circle,
-                          color: Color(0xFF62A39F),
-                        ),
-                        dropdownColor: Colors.white,
-                        decoration: InputDecoration(
-                          labelText: "Choisir un itinéraire",
-                          prefixIcon: Icon(
-                            Icons.route_outlined,
-                            color: Color(0xFF62A39F),
-                          ),
-                          hintStyle: TextStyle(color: Colors.white10),
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white10),
-                          ),
-                        ),
+                SizedBox(
+                width: mediaSize.width / 1.1,
+                child: DropdownButtonFormField<String>(
 
-                      ),
-
+                  value: routeController.routes.isNotEmpty ? routeController.routes[0].routeLongName : null,
+                  items: routeController.routes.map((route) {
+                    return DropdownMenuItem<String>(
+                      value: route.routeLongName,
+                      child: Text(route.routeLongName),
+                    );
+                  }).toList(),
+                  onChanged: (String? newValue) {},
+                  icon: Icon(
+                    Icons.arrow_drop_down_circle,
+                    color: Color(0xFF62A39F),
+                  ),
+                  dropdownColor: Colors.white,
+                  decoration: InputDecoration(
+                    labelText: "Choisir un itinéraire",
+                    prefixIcon: Icon(
+                      Icons.route_outlined,
+                      color: Color(0xFF62A39F),
                     ),
-                    SizedBox(
+                    hintStyle: TextStyle(color: Colors.white10),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white10),
+                    ),
+                  ),
+                ),
+              ),
+
+              SizedBox(
                       height: 25,
                     ),
                     Text(
@@ -198,10 +201,25 @@ class _ReclamationPageState extends State<ReclamationPage> {
 
                 ],
               ),
-
-
               SizedBox(height: 30.0),
+
               buildBasicCard(),
+
+              _image != null
+                  ? Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Image.file(
+                  _image!,
+                  width: 300,
+                  height: 300,
+                  fit: BoxFit.cover,
+                ),
+              )
+                  : Container(
+                color: Colors.transparent,
+                width: 250,
+                height: 2,
+              ),
               SizedBox(height: 30),
               TextButton(
                 onPressed: getImage,
@@ -231,25 +249,18 @@ class _ReclamationPageState extends State<ReclamationPage> {
                   ),
                 ),
               ),
+
               SizedBox(height: 40,),
               ElevatedButton(
                 onPressed: () async {
                   var res = await controller.createReclamation();
                   if (res == "Success") {
-                    var reclamation = Reclamation();
-                    controller.addReclamation(reclamation);
-
-                    var response = await ReclamationController.registration(controller.toJsonString());
-                    if (response == "Success") {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => ChoicePage()),
-                      );
-                    } else {
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(response.toString())));
-                    }
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ReclamationPage()),
+                    );
                   } else {
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(res.toString())));
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Échec de l'envoi de la réclamation")));
                   }
                 },
                 style: ButtonStyle(
@@ -270,17 +281,13 @@ class _ReclamationPageState extends State<ReclamationPage> {
                   ),
                 ),
               ),
-
-
             ],
-
           ),
         ),
-
       ),
     );
-
   }
+
 
   Widget buildBasicCard() => Container(
       padding: EdgeInsets.all(16),
@@ -303,7 +310,7 @@ class _ReclamationPageState extends State<ReclamationPage> {
       ),
       child:TextFormField(
         onChanged: (val){
-          controller.reclamation.value.description=val;
+          controller.reclamation.value.description = val;
         },
         minLines: 5,
         maxLines: 50,
