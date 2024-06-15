@@ -37,6 +37,18 @@ class ChoicePage extends StatelessWidget {
           ),
             SizedBox(height:10),
 
+
+            Text(
+              'Choisissez l\'agence qui vous représente',
+              style: TextStyle(
+                color: Colors.grey[400],
+                fontWeight: FontWeight.w900,
+                fontFamily: 'Open Sans',
+                fontSize: 10,
+              ),
+            ),
+            SizedBox(height:40),
+
             Text(
               'Choisissez l\'agence qui vous représente',
               style: TextStyle(
@@ -91,6 +103,20 @@ class ChoicePage extends StatelessWidget {
                           ));
                     }
 
+
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.grey[400],
+                border: Border.all(color: Colors.grey),
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+              child: TextButton.icon(
+                onPressed: () async {
+                  await routeController.findRoutesByAgency(3);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => BottomPage()),
+                  );
                 },
                 icon: Icon(Icons.skip_next_rounded, color: Colors.black), // Remplacer l'icône par la vôtre si nécessaire
                 label: Text(

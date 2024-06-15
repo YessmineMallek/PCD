@@ -19,6 +19,7 @@ class RouteController extends GetxController{
   findRoutesByAgency()async
   {
     agenceLoading.value=true;
+
     final token = await UserService.getToken();
     routes.value=[];
 
@@ -34,6 +35,7 @@ class RouteController extends GetxController{
       }
       agenceLoading.value=false;
       print(routes.length);
+
 
     }
   }

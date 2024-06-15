@@ -19,7 +19,6 @@ services:
       - 8080
     ports:
       - 8080:8080
-    
     environment:
       -spring.datasource.url: jdbc:postgresql://db:5432/GTFS_Base
       -spring.datasource.username: postgres
@@ -36,3 +35,4 @@ services:
       PGADMIN_DEFAULT_PASSWORD: root
     ports:
       - "5050:80"
+      

@@ -40,6 +40,7 @@ class _UserUpdatePageState extends State<UserUpdatePage> {
         backgroundColor: Colors.transparent,
         body: Stack(children: [
           Positioned(top:mediaSize.height/20, child: _buildTop()),
+
           Positioned(bottom: 0, child:_buildBottom()),
         ]),
       ),
@@ -270,6 +271,10 @@ class _UserUpdatePageState extends State<UserUpdatePage> {
                   ),
 
 
+ 
+
+                  SizedBox(height: 30,),
+
                   SizedBox(height: 15,),
 
                   ElevatedButton(
@@ -316,6 +321,7 @@ class _UserUpdatePageState extends State<UserUpdatePage> {
 
               ),
           )
+
 
         ],
       ),

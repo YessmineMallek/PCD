@@ -13,6 +13,8 @@ import 'package:train_truck/Screens/reclamation/emotion_face.dart';
 
 import 'CustomDialogReclamation.dart';
 
+import '../Login_Registration/ChoicePage.dart';
+
 
 class ReclamationPage extends StatefulWidget {
 
@@ -43,9 +45,13 @@ class _ReclamationPageState extends State<ReclamationPage> {
   }
 
 
+  ReclamationController controller=Get.put(ReclamationController());
+  RouteController routeController=Get.put(RouteController());
   late Size mediaSize;
 
   @override
+
+
   Widget build(BuildContext context) {
     mediaSize = MediaQuery.of(context).size;
 
@@ -93,10 +99,9 @@ class _ReclamationPageState extends State<ReclamationPage> {
               ),
               SizedBox(height: 30.0),
               Container(
+
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-
                     SizedBox(
                       width:mediaSize.width/1.1,
                       child: DropdownButtonFormField<String>(
@@ -128,11 +133,40 @@ class _ReclamationPageState extends State<ReclamationPage> {
                             borderSide: BorderSide(color: Colors.white10),
                           ),
                         ),
+                  children: [
 
-                      ),
+                SizedBox(
+                width: mediaSize.width / 1.1,
+                child: DropdownButtonFormField<String>(
 
+                  value: routeController.routes.isNotEmpty ? routeController.routes[0].routeLongName : null,
+                  items: routeController.routes.map((route) {
+                    return DropdownMenuItem<String>(
+                      value: route.routeLongName,
+                      child: Text(route.routeLongName),
+                    );
+                  }).toList(),
+                  onChanged: (String? newValue) {},
+                  icon: Icon(
+                    Icons.arrow_drop_down_circle,
+                    color: Color(0xFF62A39F),
+                  ),
+                  dropdownColor: Colors.white,
+                  decoration: InputDecoration(
+                    labelText: "Choisir un itinéraire",
+                    prefixIcon: Icon(
+                      Icons.route_outlined,
+                      color: Color(0xFF62A39F),
                     ),
-                    SizedBox(
+                    hintStyle: TextStyle(color: Colors.white10),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white10),
+                    ),
+                  ),
+                ),
+              ),
+
+              SizedBox(
                       height: 25,
                     ),
                     Text(
@@ -226,10 +260,25 @@ class _ReclamationPageState extends State<ReclamationPage> {
 
                 ],
               ),
-
-
               SizedBox(height: 30.0),
+
               buildBasicCard(),
+
+              _image != null
+                  ? Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Image.file(
+                  _image!,
+                  width: 300,
+                  height: 300,
+                  fit: BoxFit.cover,
+                ),
+              )
+                  : Container(
+                color: Colors.transparent,
+                width: 250,
+                height: 2,
+              ),
               SizedBox(height: 30),
               TextButton(
                 onPressed: getImage,
@@ -259,10 +308,12 @@ class _ReclamationPageState extends State<ReclamationPage> {
                   ),
                 ),
               ),
+
               SizedBox(height: 40,),
            Obx(()=> controller.isLoading.value==false?  ElevatedButton(
                 onPressed: () async {
                   var res = await controller.createReclamation();
+
                     if (res != "error") {
                       showDialog(
                           context: Get.context!,
@@ -272,6 +323,7 @@ class _ReclamationPageState extends State<ReclamationPage> {
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(res.toString())));
                     }
+
 
                 },
                 style: ButtonStyle(
@@ -296,11 +348,10 @@ class _ReclamationPageState extends State<ReclamationPage> {
 
           ),
         ),
-
       ),
     );
-
   }
+
 
   Widget buildBasicCard() => Container(
       padding: EdgeInsets.all(16),
@@ -323,7 +374,7 @@ class _ReclamationPageState extends State<ReclamationPage> {
       ),
       child:TextFormField(
         onChanged: (val){
-          controller.reclamation.value.description=val;
+          controller.reclamation.value.description = val;
         },
         minLines: 5,
         maxLines: 50,

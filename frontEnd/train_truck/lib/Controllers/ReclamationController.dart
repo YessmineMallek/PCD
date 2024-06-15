@@ -14,6 +14,14 @@ class ReclamationController extends GetxController {
   var isLoading=false.obs;
   final List<Reclamation> reclamations = <Reclamation>[].obs;
 
+  void addReclamation(Reclamation reclamation) {
+    reclamations.add(reclamation);
+  }
+
+  static Future<String> registration(String jsonData) async {
+    await Future.delayed(Duration(seconds: 2));
+    return "Success";
+  }
 
   Future createReclamation()async
   {
