@@ -203,11 +203,8 @@ class _LoginPageState extends State<LoginPage> {
             var res = await userController.authenticate();
            print(res);
              if (res == "Success") {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => ChoicePage()),
-              );
+             Get.to(()=>ChoicePage());
+
             } else {
               if (res != null) {
                 ScaffoldMessenger.of(context).showSnackBar(

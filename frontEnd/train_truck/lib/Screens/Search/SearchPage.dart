@@ -7,6 +7,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:train_truck/Controllers/RouteController.dart';
 import 'package:get/get.dart';
+import 'package:train_truck/Screens/Bottom.dart';
+
 import 'package:train_truck/Screens/Maps/CustomDialog.dart';
 
 class SearchPage extends StatefulWidget {
@@ -62,12 +64,14 @@ class _SearchPageState extends State<SearchPage> {
       child:  Stack(
 
         children: [
+
           Positioned(
             top: 20,
             child: IconButton(
                 onPressed: (){Navigator.of(context).pop();},
                 icon: Icon(Icons.arrow_back_outlined,color: Colors.white,)),
           ),
+
           Align(alignment: Alignment.topRight, child:  Image.asset("assets/images/train.png",width: 250,))
 
 

@@ -34,13 +34,20 @@ class ItineraireCard extends StatelessWidget {
         ),
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 20,vertical: 10),
-          child: Text(
-            route.routeLongName,
-            style: TextStyle(
-              color: Colors.black87,
-              fontWeight: FontWeight.bold,
-            ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                route.routeLongName,
+                style: TextStyle(
+                  color: Colors.black87,
+                  fontWeight: FontWeight.bold,
+                ),
 
+              ),
+              (route.etat=="Accident")?
+              Icon(Icons.error_outline,color: Colors.red,):Container()
+            ],
           ),
         ),
       ),

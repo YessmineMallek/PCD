@@ -48,4 +48,26 @@ class RouteService
 
   }
 
+  updateRoute(jwt,longName,status)async
+  {
+    String baseUrl = "${Env().ipAdresse}/api/v1/routes/update/${longName}/${status}";
+    try
+    {
+      final res = await http.post(
+        Uri.parse(baseUrl),
+        headers: <String, String>{
+          'Authorization': 'Bearer ' + jwt.toString(),
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+      );
+      print("----------------"+res.body.toString());
+
+      print("----------------"+res.statusCode.toString());
+      return res;
+    } catch (e) {
+      print("RouteService: error update route $e");
+    }
+
+  }
+    }
 }

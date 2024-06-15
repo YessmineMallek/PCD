@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:train_truck/Controllers/RouteController.dart';
+import 'package:get/get.dart';
 
 class GlowingButton extends StatefulWidget {
   final Color color1;
@@ -23,18 +25,6 @@ class _GlowingButtonState extends State<GlowingButton> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTapUp: (val) {
-        setState(() {
-          glowing = false;
-          scale = 1.0;
-        });
-      },
-      onTapDown: (val) {
-        setState(() {
-          glowing = true;
-          scale = 1.1;
-        });
-      },
       child: AnimatedContainer(
         transform: Matrix4.identity()..scale(scale),
         duration: Duration(milliseconds: 200),

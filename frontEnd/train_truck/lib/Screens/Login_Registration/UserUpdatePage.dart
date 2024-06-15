@@ -39,7 +39,8 @@ class _UserUpdatePageState extends State<UserUpdatePage> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Stack(children: [
-          Positioned(top:mediaSize.height/15, child: _buildTop()),
+          Positioned(top:mediaSize.height/20, child: _buildTop()),
+
           Positioned(bottom: 0, child:_buildBottom()),
         ]),
       ),
@@ -111,10 +112,9 @@ class _UserUpdatePageState extends State<UserUpdatePage> {
         children: [
 
           Container(
-            alignment: Alignment.center,
             child:Text("Modifier votre compte",style: TextStyle(
                 color: primaryColor,fontWeight: FontWeight.w500,
-                fontSize: 30)) ,
+                fontSize: 20)) ,
           ),
 
           Container(
@@ -271,6 +271,10 @@ class _UserUpdatePageState extends State<UserUpdatePage> {
                   ),
 
 
+ 
+
+                  SizedBox(height: 30,),
+
                   SizedBox(height: 15,),
 
                   ElevatedButton(
@@ -309,51 +313,15 @@ class _UserUpdatePageState extends State<UserUpdatePage> {
                     ),),
 
 
-                  SizedBox(height: 30,),
-
-                 ElevatedButton(
-                        onPressed: ()async{
-
-                          userController.userUpdateForm.value.passwordUser= userController.userUpdated.value.passwordUser;
-                          userController.userUpdateForm.value.phoneNumber= userController.userUpdated.value.phoneNumber;
-                          userController.userUpdateForm.value.activated= 0;
-
-                          var res=await userController.updateUser();
-
-                          if(res!=null){
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content:  Text(res.toString())));
-                              userController.logOut();
-                             Get.offAll(SplashScreen());
-                          }
 
 
-                        },
-                        style: ButtonStyle(
-                          shape: MaterialStateProperty.all<
-                              RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                          ),
-                          backgroundColor:
-                          MaterialStateProperty.all(Theme.of(context).primaryColor),
-                        ),
-                        child:Obx(()=>userController.isLodingUpdate.value==false?  Text(
-                            "Désactiver le compte",
-                            style: TextStyle(
-                                fontSize: 18,
-                                color: Colors.white,
-                                fontWeight: FontWeight.normal),
-
-                        ):CircularProgressIndicator())),
-
-                    ],
+                ],
                   )
 
 
               ),
           )
+
 
         ],
       ),

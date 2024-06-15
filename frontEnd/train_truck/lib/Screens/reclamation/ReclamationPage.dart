@@ -8,7 +8,11 @@ import 'package:image_picker/image_picker.dart';
 import 'package:train_truck/Controllers/ReclamationController.dart';
 import 'package:train_truck/Controllers/RouteController.dart';
 import 'package:train_truck/Models/Reclamation.dart';
+import 'package:train_truck/Screens/Login_Registration/ChoicePage.dart';
 import 'package:train_truck/Screens/reclamation/emotion_face.dart';
+
+import 'CustomDialogReclamation.dart';
+
 import '../Login_Registration/ChoicePage.dart';
 
 
@@ -22,6 +26,10 @@ class ReclamationPage extends StatefulWidget {
 class _ReclamationPageState extends State<ReclamationPage> {
   File? _image;
   final ImagePicker _imagePicker = ImagePicker();
+  ReclamationController controller=Get.put(ReclamationController());
+  RouteController routeController=Get.put(RouteController());
+
+
 
   Future<void> getImage() async {
     final XFile? image = await _imagePicker.pickImage(source: ImageSource.camera);
@@ -29,11 +37,13 @@ class _ReclamationPageState extends State<ReclamationPage> {
       if (image != null) {
         print(image.path);
         _image = File(image.path);
+        controller.reclamation.value.image=image;
       } else {
         print('No image selected.');
       }
     });
   }
+
 
   ReclamationController controller=Get.put(ReclamationController());
   RouteController routeController=Get.put(RouteController());
@@ -62,7 +72,6 @@ class _ReclamationPageState extends State<ReclamationPage> {
                       children: [
                         IconButton(
                           onPressed: () {
-                            Navigator.of(context).pop();
                           },
                           icon: Icon(
                             Icons.arrow_back_ios_new_sharp,
@@ -93,7 +102,37 @@ class _ReclamationPageState extends State<ReclamationPage> {
 
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                    SizedBox(
+                      width:mediaSize.width/1.1,
+                      child: DropdownButtonFormField<String>(
+                        value: routeController.routes.isNotEmpty ? routeController.routes[0].routeLongName : null,
+                        items: routeController.routes.map((route) {
+                          return DropdownMenuItem<String>(
+                            value: route.routeLongName,
+                            child: Text(route.routeLongName),
+                          );
+                        }).toList(),
+                        onChanged: (String? newValue) {
+                          print("---------------------------"+newValue.toString());
+                          controller.reclamation.value.route=newValue.toString();
 
+                        },
+                        icon: Icon(
+                          Icons.arrow_drop_down_circle,
+                          color: Color(0xFF62A39F),
+                        ),
+                        dropdownColor: Colors.white,
+                        decoration: InputDecoration(
+                          labelText: "Choisir un itinéraire",
+                          prefixIcon: Icon(
+                            Icons.route_outlined,
+                            color: Color(0xFF62A39F),
+                          ),
+                          hintStyle: TextStyle(color: Colors.white10),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white10),
+                          ),
+                        ),
                   children: [
 
                 SizedBox(
@@ -150,54 +189,74 @@ class _ReclamationPageState extends State<ReclamationPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Column(
-                    children: [
-                      EmotionFace(
-                        emotionalFace: '😞',
-                      ),
-                      SizedBox(height: 8,),
-                      Text('Mauvais',
-                          style: TextStyle(
-                            color: Colors.black,
-                          )),
-                    ],
+                  InkWell(
+                    onLongPress: (){
+                      print("Mauvais");
+                      controller.reclamation.value.emotion="Mauvais";
+                      },
+                    child: Column(
+                      children: [
+                        EmotionFace(
+                          emotionalFace: '😞',
+                        ),
+                        SizedBox(height: 8,),
+                        Text('Mauvais',
+                            style: TextStyle(
+                              color: Colors.black,
+                            )),
+                      ],
+                    ),
                   ),
-                  Column(
-                    children: [
-                      EmotionFace(
-                        emotionalFace: '🙂',
-                      ),
-                      SizedBox(height: 8,),
-                      Text('Bien',
-                          style: TextStyle(
-                            color: Colors.black,
-                          )),
-                    ],
+                  InkWell(
+                    onLongPress: (){controller.reclamation.value.emotion="Bien";},
+                    child: Column(
+                      children: [
+                        EmotionFace(
+                          emotionalFace: '🙂',
+                        ),
+                        SizedBox(height: 8,),
+                        Text('Bien',
+                            style: TextStyle(
+                              color: Colors.black,
+                            )),
+                      ],
+                    ),
                   ),
-                  Column(
-                    children: [
-                      EmotionFace(
-                        emotionalFace: '😊',
-                      ),
-                      SizedBox(height: 8,),
-                      Text('Très bien',
-                          style: TextStyle(
-                            color: Colors.black,
-                          )),
-                    ],
+                  InkWell(
+                    onLongPress: (){
+                      print("Très bien");
+                      controller.reclamation.value.emotion="Très bien";
+                      },
+                    child: Column(
+                      children: [
+                        EmotionFace(
+                          emotionalFace: '😊',
+                        ),
+                        SizedBox(height: 8,),
+                        Text('Très bien',
+                            style: TextStyle(
+                              color: Colors.black,
+                            )),
+                      ],
+                    ),
                   ),
-                  Column(
+                  InkWell(
+                    onLongPress: (){
+                      print("Excellent");
+                      controller.reclamation.value.emotion="Excellent";
+                      },
+                    child:  Column(
                     children: [
                       EmotionFace(
                         emotionalFace: '😁',
                       ),
                       SizedBox(height: 8,),
-                      Text('Excellent',
-                          style: TextStyle(
-                            color: Colors.black,
-                          )),
+                     Text('Excellent',
+                            style: TextStyle(
+                              color: Colors.black,
+                            )),
                     ],
-                  ),
+                  )),
 
                 ],
               ),
@@ -251,17 +310,21 @@ class _ReclamationPageState extends State<ReclamationPage> {
               ),
 
               SizedBox(height: 40,),
-              ElevatedButton(
+           Obx(()=> controller.isLoading.value==false?  ElevatedButton(
                 onPressed: () async {
                   var res = await controller.createReclamation();
-                  if (res == "Success") {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => ReclamationPage()),
-                    );
-                  } else {
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Échec de l'envoi de la réclamation")));
-                  }
+
+                    if (res != "error") {
+                      showDialog(
+                          context: Get.context!,
+                          builder: (BuildContext context) {
+                            return CustomDialogReclamation(msg: res);
+                          });
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(res.toString())));
+                    }
+
+
                 },
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -280,8 +343,9 @@ class _ReclamationPageState extends State<ReclamationPage> {
                     fontWeight: FontWeight.normal,
                   ),
                 ),
-              ),
-            ],
+              ):Container(child: CircularProgressIndicator(),),
+           ) ],
+
           ),
         ),
       ),

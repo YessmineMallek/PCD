@@ -8,6 +8,7 @@ import 'package:train_truck/Screens/Bottom.dart';
 import 'package:train_truck/Screens/Login_Registration/ChoicePage.dart';
 import 'package:train_truck/Screens/Login_Registration/SplashScreen.dart';
 import 'package:train_truck/Screens/Login_Registration/loginPage.dart';
+import 'package:train_truck/Screens/Maps/Itin%C3%A9raireScreen.dart';
 
 import 'package:train_truck/Screens/Maps/MapScreen.dart';
 import 'package:train_truck/Screens/Search/SearchPage.dart';
@@ -42,7 +43,7 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       title: 'Train Truck',
-      home: SplashScreen(),
+      home: ItineraireScreen(),
     );
   }
 }

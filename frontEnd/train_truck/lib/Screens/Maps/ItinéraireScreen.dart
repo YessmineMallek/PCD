@@ -29,6 +29,7 @@ class _ItineraireScreen extends State<ItineraireScreen> {
   @override
   Widget build(BuildContext context) {
     stopController.findAllStops();
+    print(routeController.routes.length);
 
     return
       Stack(
