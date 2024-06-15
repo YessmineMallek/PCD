@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:train_truck/Controllers/RouteController.dart';
 import 'package:get/get.dart';
+import 'package:train_truck/Models/Route.dart';
 import 'package:train_truck/Screens/Maps/CustomDialog.dart';
 
 class DetailRoutesPage extends StatefulWidget {
@@ -31,6 +32,7 @@ class _DetailRoutesPageState extends State<DetailRoutesPage> {
     @override
   void initState() {
       print(routeController.routeDetail.value.trip);
+
       List<String> chainesSeparees = routeController.routeDetail.value.routeLongName!.split("-");
       if (chainesSeparees.length >= 2) {
          origine = chainesSeparees[0];
@@ -41,7 +43,6 @@ class _DetailRoutesPageState extends State<DetailRoutesPage> {
   }
     @override
     Widget build(BuildContext context) {
-
 
       mediaSize = MediaQuery.of(context).size;
       myColor=Theme.of(context).primaryColor;
@@ -183,7 +184,7 @@ class _DetailRoutesPageState extends State<DetailRoutesPage> {
                       itemCount: routeController.routeDetail.value.trip!.length,
                       itemBuilder: (context, index) {
                         var item=routeController.routeDetail.value.trip![index]!;
-                        return (item.tripHeadsign!.toLowerCase()==destination)? Container(padding: EdgeInsets.symmetric(vertical: 5), child:_buildTripItem(index) ):Container();
+                        return (item.tripHeadsign!.toLowerCase()==destination.toString().toLowerCase())? Container(padding: EdgeInsets.symmetric(vertical: 5), child:_buildTripItem(index) ):Container();
                       }
 
               )
@@ -262,3 +263,34 @@ class _DetailRoutesPageState extends State<DetailRoutesPage> {
     }
 
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                         // Text(
+                         // "A partir de: ",
+                         // style: TextStyle(
+                          //  color: grey,
+                          //  fontSize: 15,
+                          //  fontWeight: FontWeight.w500,
+                        //  ),
+                       // ),
+
+                        //  validator: (val) {
+                         //   if (val == null || val.isEmpty) {
+                          //    return "Veuillez saisir votre départ";
+                          //  }
+                         //   return null;
+                        //  },
+                      // ),

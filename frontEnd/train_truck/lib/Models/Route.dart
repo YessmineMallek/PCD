@@ -6,6 +6,7 @@ class Route {
   String? routeShortName=" ";
   String? routeLongName=" ";
   List<Trip>? trip;
+  String? etat;
 
 
   Route(
@@ -13,13 +14,15 @@ class Route {
          this.agancy,
         this.trip,
         this.routeShortName,
-         this.routeLongName});
+         this.routeLongName,
+      this.etat});
 
   Route.fromJson(Map<String, dynamic> json) {
     routeId = json['route_id'];
     agancy = json['agancy'];
     routeShortName = json['routeShortName'];
     routeLongName = json['routeLongName'];
+    etat=json["etat"];
 
     if (json['trips'] != null) {
       trip = <Trip>[];

@@ -25,41 +25,85 @@ class ChoicePage extends StatelessWidget {
           children: [
             HeaderWidget(),
             SizedBox(height:100),
+          Text(
+            'Choisir votre agence ',
+            maxLines: 3,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+                color: Colors.grey[800],
+                fontWeight: FontWeight.w900,
+                fontFamily: 'Open Sans',
+                fontSize: 30),
+          ),
+            SizedBox(height:10),
+
+            Text(
+              'Choisissez l\'agence qui vous représente',
+              style: TextStyle(
+                color: Colors.grey[400],
+                fontWeight: FontWeight.w900,
+                fontFamily: 'Open Sans',
+                fontSize: 10,
+              ),
+            ),
+            SizedBox(height:40),
 
             InkWell(
-              onTap: ()=>{value=3},
-              child: GlowingButton(
-                text: "Grand lignes",
-              ),
-            ),
+                onTap: (){
+                  routeController.agencyId.value=3;
+                },
+                child: GlowingButton(text: "Grand lignes",)),
+
             SizedBox(height:30),
             InkWell(
-              onTap: ()=>{value=2},
-              child: GlowingButton(
-                text: "Banlieue Sud",
-              ),
-            ),
+                onTap: (){
+                  routeController.agencyId.value=2;
+                },
+                child: GlowingButton(text: "Banlieue Sud",)),
+
             SizedBox(height:30),
-            InkWell(
-              onTap: ()=>{value=1},
-              child: GlowingButton(
-                text: "Sahel",
-              ),
-            ),
+             InkWell(
+               child: GlowingButton(text: "Sahel"),
+               onTap: (){
+               routeController.agencyId.value=1;
+             },),
+
             SizedBox(height:30),
 
-            IconButton(
-              alignment: Alignment.topRight,
-                onPressed: ()async {
-                      await routeController.findRoutesByAgency(3);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>  BottomPage()),
-                      );
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.grey[400],
+                border: Border.all(color: Colors.grey),
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+              child: TextButton.icon(
+                onPressed: () async {
+                  if(routeController.agencyId.value!=0)
+                    {
+                        await routeController.findRoutesByAgency();
+                       Get.to(()=>BottomPage());
+                    }else
+                    {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text("Selectionnez votre agence"),
+
+                          ));
+                    }
 
                 },
-                icon: Icon(Icons.skip_next_rounded,size: 40,)),
+                icon: Icon(Icons.skip_next_rounded, color: Colors.black), // Remplacer l'icône par la vôtre si nécessaire
+                label: Text(
+                  'Suivant',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+
           ],
         ),
 

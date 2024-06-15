@@ -29,37 +29,38 @@ class _ItineraireScreen extends State<ItineraireScreen> {
   @override
   Widget build(BuildContext context) {
     stopController.findAllStops();
+    print(routeController.routes.length);
 
     return
-         Stack(
-            children: [
+      Stack(
+        children: [
 
-              content(),
-              Positioned(
-                top: 20,
-                child: IconButton(
-                    onPressed: (){
-                      Navigator.of(context).pop();
+          content(),
+          Positioned(
+            top: 20,
+            child: IconButton(
+                onPressed: (){
+                  Navigator.of(context).pop();
 
-                    }, icon: Icon(Icons.arrow_back_outlined,color: Colors.black,)),
-              ),
-              Positioned(
-                bottom: 0,
-                left: 0,
-                right: 0,
-                child: Container(
-                  height: 300,
+                }, icon: Icon(Icons.arrow_back_outlined,color: Colors.black,)),
+          ),
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Container(
+                height: 300,
 
-                  child: Card(
-                    shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(30),
-                          topRight: Radius.circular(30),
-                        )),
-                    elevation: 4,
+                child: Card(
+                  shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(30),
+                        topRight: Radius.circular(30),
+                      )),
+                  elevation: 4,
 
-                    color:  HexColor('#62A39F').withOpacity(0.9),
-                    child: Center(
+                  color:  HexColor('#62A39F').withOpacity(0.9),
+                  child: Center(
                     child: Column(
                         children: [
                           Row(
@@ -125,12 +126,12 @@ class _ItineraireScreen extends State<ItineraireScreen> {
                         ]
                     ),
                   ),)
-              ),
-      ),
-      ],
+            ),
+          ),
+        ],
 
 
-    );
+      );
   }
   Widget content() {
     return FlutterMap(
@@ -139,9 +140,9 @@ class _ItineraireScreen extends State<ItineraireScreen> {
           initialZoom: 9,
           interactionOptions:
           const InteractionOptions(flags: ~InteractiveFlag.doubleTapZoom)),
-          children: [
-           openStreetMapTileLater,
-           Obx(
+      children: [
+        openStreetMapTileLater,
+        Obx(
               ()=> MarkerLayer(
 
               markers: [

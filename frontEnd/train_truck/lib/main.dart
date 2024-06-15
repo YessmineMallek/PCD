@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
+// import 'package:train_truck/Screens/Search/SearchPage.dart';
+import 'package:train_truck/Screens/Maps/DetailRoutes.dart';
+import 'package:train_truck/Screens/DetailsScreen.dart';
 import 'package:train_truck/Screens/Bottom.dart';
 import 'package:train_truck/Screens/Login_Registration/ChoicePage.dart';
 import 'package:train_truck/Screens/Login_Registration/SplashScreen.dart';
 import 'package:train_truck/Screens/Login_Registration/loginPage.dart';
+import 'package:train_truck/Screens/Maps/Itin%C3%A9raireScreen.dart';
 
 import 'package:train_truck/Screens/Maps/MapScreen.dart';
+import 'package:train_truck/Screens/Search/SearchPage.dart';
 import 'package:wifi_iot/wifi_iot.dart';
 
 void main() {
@@ -38,7 +43,7 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       title: 'Train Truck',
-      home: SplashScreen(),
+      home: ItineraireScreen(),
     );
   }
 }

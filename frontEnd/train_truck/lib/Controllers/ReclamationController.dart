@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:get/get.dart';
+import 'package:train_truck/Controllers/RouteController.dart';
 import 'package:train_truck/Models/Reclamation.dart';
 import 'package:train_truck/Models/User.dart';
 import 'package:train_truck/Services/ReclamationService.dart';
@@ -8,24 +9,32 @@ import 'package:train_truck/Services/UserService.dart';
 
 class ReclamationController extends GetxController {
   ReclamationService recService = ReclamationService();
+  RouteController routeController=Get.put(RouteController());
   var reclamation=Reclamation().obs;
-
+  var isLoading=false.obs;
   final List<Reclamation> reclamations = <Reclamation>[].obs;
 
 
   Future createReclamation()async
   {
-    print(reclamation.value);
     final token = await UserService.getToken();
-
     var phone=await UserService.getPhoneNumber();
+    isLoading.value=true;
+    print(phone);
+    User user=User();
+    user.phoneNumber=phone;
+    reclamation.value.phoneNumber=user;
 
-    var res=await recService.submitReclamation(reclamation.value,token);
-    print(res.body);
-    if(res.statusCode == 200)
+    var res=await recService.addReclamation(reclamation.value,token);
+
+    if(res != "error")
     {
-      return "Success";
-    }else
+      routeController.routes.value=[];
+      routeController.findRoutesByAgency();
+      isLoading.value=false;
+      return res;
+    }
+    else
     {
       return "Echec";
     }
@@ -33,14 +42,7 @@ class ReclamationController extends GetxController {
   }
 
 
-  void addReclamation(Reclamation reclamation) {
-    reclamations.add(reclamation);
-  }
 
-  static Future<String> registration(String jsonData) async {
-    await Future.delayed(Duration(seconds: 2));
-    return "Success";
-  }
 
 
 

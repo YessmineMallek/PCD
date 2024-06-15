@@ -88,7 +88,6 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
     );
   }
 
-
   Widget _buildForm()
   {
     var color=HexColor("#355095");

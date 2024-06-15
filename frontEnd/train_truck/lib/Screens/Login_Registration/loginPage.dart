@@ -89,7 +89,7 @@ class _LoginPageState extends State<LoginPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            "Bienvenu",
+            "Bienvenue",
             style: TextStyle(
                 color: myColor, fontSize: 32, fontWeight: FontWeight.w500),
           ),
@@ -201,13 +201,9 @@ class _LoginPageState extends State<LoginPage> {
 
           ElevatedButton(onPressed: () async {
             var res = await userController.authenticate();
-            print(res);
-            if (res == "Success") {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => ChoicePage()),
-              );
+           print(res);
+             if (res == "Success") {
+             Get.to(()=>ChoicePage());
             } else {
               if (res != null) {
                 ScaffoldMessenger.of(context).showSnackBar(
